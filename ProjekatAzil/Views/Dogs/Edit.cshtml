@@ -24,7 +24,17 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach(var breed in ViewBag.Breed)
+                {
+                    
+                    <input type="checkbox" name="DogBreedIds" value="@breed.Id" @if(Model.Breeds.Any(x => x.Id == breed.Id)){ @Html.Raw("checked='checked'") } >@breed.Name<br>
+                    
+                }
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.YearOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

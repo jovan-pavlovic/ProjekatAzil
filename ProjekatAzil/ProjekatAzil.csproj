@@ -200,6 +200,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BreedsController.cs" />
     <Compile Include="Controllers\DogsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -287,6 +288,11 @@
     <Content Include="Views\Dogs\Details.cshtml" />
     <Content Include="Views\Dogs\Edit.cshtml" />
     <Content Include="Views\Dogs\Index.cshtml" />
+    <Content Include="Views\Breeds\Create.cshtml" />
+    <Content Include="Views\Breeds\Delete.cshtml" />
+    <Content Include="Views\Breeds\Details.cshtml" />
+    <Content Include="Views\Breeds\Edit.cshtml" />
+    <Content Include="Views\Breeds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -93,7 +93,12 @@ namespace ProjekatAzil.Controllers
             if (ModelState.IsValid)
             {
                 //dog.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
-                
+                foreach (var breedId in dogBreedIds)
+                {
+                    var breed = db.Breeds.FirstOrDefault(x => x.Id == breedId);
+                    dog.Breeds.Remove(breed);
+                }
+
                 db.Entry(dog).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

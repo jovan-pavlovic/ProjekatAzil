@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,14 +13,21 @@ namespace ProjekatAzil.Models
         Adopted
     }
 
+    public enum Sex
+    {
+        Male,
+        Female
+    }
+
     public class Dog
     {
         public int Id { get; set; }
         public string Name { get; set;}
-        public DateTime YearOfBirth { get; set; }
-        public int Age { get { return DateTime.Now.Year - YearOfBirth.Year; } }
+        //[Range(2000,2018)] moze i ovo ali sa JS izgleda bolje,vise koda
+        public int YearOfBirth { get; set; }
+        public int Age { get { return DateTime.Now.Year - YearOfBirth; } }
         public string Description { get; set; }
-        public bool Sex { get; set; }
+        public Sex Sex { get; set; }
         public decimal Weight { get; set; }
         public AdoptionStatus Adoption { get; set; }
 

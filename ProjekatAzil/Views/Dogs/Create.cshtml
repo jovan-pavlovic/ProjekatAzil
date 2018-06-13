@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm("Create", "Dogs", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+@using (Html.BeginForm("Create", "Dogs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Dog</h4>
         <hr />
@@ -22,7 +22,15 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach(var breed in ViewBag.Breed)
+                {
+                    <input type="checkbox" name="DogBreedIds" value="@breed.Id" >@breed.Name<br>
+                }
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.YearOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

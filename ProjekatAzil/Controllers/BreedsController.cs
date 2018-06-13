@@ -10,124 +10,107 @@ using ProjekatAzil.Models;
 
 namespace ProjekatAzil.Controllers
 {
-    public class DogsController : Controller
+    public class BreedsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Dogs
+        // GET: Breeds
         public ActionResult Index()
         {
-            ShowBreed();
-            return View(db.Dogs.ToList());
+            return View(db.Breeds.ToList());
         }
 
-        // GET: Dogs/Details/5
+        // GET: Breeds/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dog dog = db.Dogs.Find(id);
-            if (dog == null)
+            Breed breed = db.Breeds.Find(id);
+            if (breed == null)
             {
                 return HttpNotFound();
             }
-            return View(dog);
+            return View(breed);
         }
 
-        // GET: Dogs/Create
+        // GET: Breeds/Create
         public ActionResult Create()
         {
-            ShowBreed();
             return View();
         }
 
-        // POST: Dogs/Create
+        // POST: Breeds/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,YearOfBirth,Description,Sex,Weight,Adoption")] Dog dog, int[] dogBreedIds)
+        public ActionResult Create([Bind(Include = "Id,Name")] Breed breed)
         {
-            ShowBreed();
             if (ModelState.IsValid)
             {
-                dog.Adoption = AdoptionStatus.FreeForAdoption;
-
-                dog.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
-
-                db.Dogs.Add(dog);
-                
+                db.Breeds.Add(breed);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(dog);
+            return View(breed);
         }
 
-        // GET: Dogs/Edit/5
+        // GET: Breeds/Edit/5
         public ActionResult Edit(int? id)
         {
-            ShowBreed();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dog dog = db.Dogs.Find(id);
-            if (dog == null)
+            Breed breed = db.Breeds.Find(id);
+            if (breed == null)
             {
                 return HttpNotFound();
             }
-            return View(dog);
+            return View(breed);
         }
 
-        // POST: Dogs/Edit/5
+        // POST: Breeds/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,YearOfBirth,Description,Sex,Weight,Adoption")] Dog dog, int[] dogBreedIds)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Breed breed)
         {
-            ShowBreed();
             if (ModelState.IsValid)
             {
-                //dog.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
-                foreach (var breedId in dogBreedIds)
-                {
-                    var breed = db.Breeds.FirstOrDefault(x => x.Id == breedId);
-                    dog.Breeds.Remove(breed);
-                }
-
-                db.Entry(dog).State = EntityState.Modified;
+                db.Entry(breed).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(dog);
+            return View(breed);
         }
 
-        // GET: Dogs/Delete/5
+        // GET: Breeds/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dog dog = db.Dogs.Find(id);
-            if (dog == null)
+            Breed breed = db.Breeds.Find(id);
+            if (breed == null)
             {
                 return HttpNotFound();
             }
-            return View(dog);
+            return View(breed);
         }
 
-        // POST: Dogs/Delete/5
+        // POST: Breeds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Dog dog = db.Dogs.Find(id);
-            db.Dogs.Remove(dog);
+            Breed breed = db.Breeds.Find(id);
+            db.Breeds.Remove(breed);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -139,10 +122,6 @@ namespace ProjekatAzil.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        private void ShowBreed()
-        {
-            ViewBag.Breed = db.Breeds.ToList();
         }
     }
 }

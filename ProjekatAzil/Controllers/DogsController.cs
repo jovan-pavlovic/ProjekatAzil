@@ -92,14 +92,16 @@ namespace ProjekatAzil.Controllers
             ShowBreed();
             if (ModelState.IsValid)
             {
-                //dog.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
-                foreach (var breedId in dogBreedIds)
+               
+                var dogBase = db.Dogs.Find(dog.Id);
+                dogBase.Breeds.Clear();
+                if(dogBreedIds != null)
                 {
-                    var breed = db.Breeds.FirstOrDefault(x => x.Id == breedId);
-                    dog.Breeds.Remove(breed);
+                    dogBase.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
                 }
-
-                db.Entry(dog).State = EntityState.Modified;
+                
+                db.Entry(dogBase).State = EntityState.Modified;
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

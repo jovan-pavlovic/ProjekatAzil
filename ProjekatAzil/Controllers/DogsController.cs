@@ -87,12 +87,14 @@ namespace ProjekatAzil.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,YearOfBirth,Description,Sex,Weight,Adoption")] Dog dog, int[] dogBreedIds)
+        public ActionResult Edit(Dog dog, int[] dogBreedIds)
         {
             ShowBreed();
             if (ModelState.IsValid)
             {
                 var dogBase = db.Dogs.Find(dog.Id);
+
+                TryUpdateModel(dogBase, new string[] { "Name", "YearOfBirth", "Description", "Sex", "Weight", "Adoption" });
 
                 if (dogBase.Breeds.Count() != 0)
                 {

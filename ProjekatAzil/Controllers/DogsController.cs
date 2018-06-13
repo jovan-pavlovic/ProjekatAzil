@@ -55,7 +55,7 @@ namespace ProjekatAzil.Controllers
             {
                 dog.Adoption = AdoptionStatus.FreeForAdoption;
 
-                dog.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
+                InputBreedsForDog(dog, dogBreedIds);
 
                 db.Dogs.Add(dog);
                 
@@ -92,14 +92,19 @@ namespace ProjekatAzil.Controllers
             ShowBreed();
             if (ModelState.IsValid)
             {
-                //dog.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
-                foreach (var breedId in dogBreedIds)
+                var dogBase = db.Dogs.Find(dog.Id);
+
+                if (dogBase.Breeds.Count() != 0)
                 {
-                    var breed = db.Breeds.FirstOrDefault(x => x.Id == breedId);
-                    dog.Breeds.Remove(breed);
+                    //breeds that are in dog.Breeds but not checked in view
+                    dogBase.Breeds.Where(b => !dogBreedIds.Contains(b.Id)).ToList().ForEach(b => dogBase.Breeds.Remove(b));
+                }
+                else
+                {
+                    InputBreedsForDog(dogBase, dogBreedIds);
                 }
 
-                db.Entry(dog).State = EntityState.Modified;
+                db.Entry(dogBase).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -140,9 +145,20 @@ namespace ProjekatAzil.Controllers
             }
             base.Dispose(disposing);
         }
+
+
         private void ShowBreed()
         {
             ViewBag.Breed = db.Breeds.ToList();
+        }
+
+        private void InputBreedsForDog(Dog dog, int[] dogBreedIds)
+        {
+            foreach(var breedId in dogBreedIds)
+            {
+                var breed = db.Breeds.FirstOrDefault(b => b.Id == breedId);
+                db.Dogs.FirstOrDefault(d => d.Id == dog.Id).Breeds.Add(breed);
+            }
         }
     }
 }

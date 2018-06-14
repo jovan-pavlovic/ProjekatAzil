@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjekatAzil.Models;
 using System.Linq.Dynamic;
+using System.Data.Entity;
+using System.Net;
 
 namespace ProjekatAzil.Controllers
 {
@@ -32,6 +31,10 @@ namespace ProjekatAzil.Controllers
             {
                 DogQuery = DogQuery.OrderBy(string.Format("{0} {1}", viewModelDogs.SortBy, viewModelDogs.SortDirection));
             }
+
+            viewModelDogs.Count = DogQuery.Count();
+            DogQuery = DogQuery.Skip((viewModelDogs.Page - 1) * viewModelDogs.PageSize).Take(viewModelDogs.PageSize);
+
             viewModelDogs.Dogs = DogQuery.ToList();
 
 

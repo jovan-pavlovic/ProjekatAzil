@@ -1,9 +1,13 @@
 namespace ProjekatAzil.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using ProjekatAzil.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Web.Configuration;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ProjekatAzil.Models.ApplicationDbContext>
     {
@@ -26,6 +30,36 @@ namespace ProjekatAzil.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            if (!roleManager.RoleExists(Roles.ADMIN))
+            {
+                roleManager.Create(new IdentityRole(Roles.ADMIN));
+            }
+            if (!roleManager.RoleExists(Roles.USER))
+            {
+                roleManager.Create(new IdentityRole(Roles.USER));
+            }
+
+            var adminEmail = WebConfigurationManager.AppSettings["AdminEmail"];
+            var adminPass = WebConfigurationManager.AppSettings["AdminPassword"];
+
+            if (!context.Users.Any(p => p.Email == adminEmail))
+            {
+                var adminManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var passwordHash = adminManager.PasswordHasher.HashPassword(adminPass);
+                var admin = new ApplicationUser
+                {
+                    Email = adminEmail,
+                    UserName = adminEmail,
+                    PasswordHash = passwordHash,
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+                context.Users.Add(admin);
+                context.SaveChanges();
+                adminManager.AddToRole(admin.Id, Roles.ADMIN);
+            }
+
         }
     }
 }

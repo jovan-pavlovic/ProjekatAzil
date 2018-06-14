@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjekatAzil.Models;
+using System.Linq.Dynamic;
 
 namespace ProjekatAzil.Controllers
 {
@@ -15,10 +16,27 @@ namespace ProjekatAzil.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Dogs
-        public ActionResult Index()
+        public ActionResult Index(DogsViewModel viewModelDogs)
         {
-            ShowBreed();
-            return View(db.Dogs.ToList());
+            //ShowBreed();
+            IQueryable<Dog> DogQuery = db.Dogs;
+            if(viewModelDogs.DogName != null)
+            {
+                DogQuery = DogQuery.Where(d => d.Name.Contains(viewModelDogs.DogName));
+            }
+            if(viewModelDogs.DogBreed != null)
+            {
+                DogQuery = DogQuery.Where(d => d.Breeds.Any(a => a.Name.Contains(viewModelDogs.DogBreed)));
+            }
+            if(viewModelDogs.SortBy != null && viewModelDogs.SortDirection != null)
+            {
+                DogQuery = DogQuery.OrderBy(string.Format("{0} {1}", viewModelDogs.SortBy, viewModelDogs.SortDirection));
+            }
+            viewModelDogs.Dogs = DogQuery.ToList();
+
+
+            
+            return View(viewModelDogs);
         }
 
         // GET: Dogs/Details/5
@@ -87,13 +105,14 @@ namespace ProjekatAzil.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,YearOfBirth,Description,Sex,Weight,Adoption")] Dog dog, int[] dogBreedIds)
+        public ActionResult Edit(Dog dog, int[] dogBreedIds)
         {
             ShowBreed();
             if (ModelState.IsValid)
             {
                
                 var dogBase = db.Dogs.Find(dog.Id);
+                TryUpdateModel(dogBase, new string[] { "Name", "YearOfBirth", "Description", "Sex", "Weight", "Adoption" });
                 dogBase.Breeds.Clear();
                 if(dogBreedIds != null)
                 {

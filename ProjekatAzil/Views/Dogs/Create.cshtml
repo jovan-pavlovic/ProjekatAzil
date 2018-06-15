@@ -11,77 +11,79 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Dog</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
+<div class="form-horizontal">
+    <h4>Dog</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @foreach(var breed in ViewBag.Breed)
-                {
-                    <input type="checkbox" name="DogBreedIds" value="@breed.Id" >@breed.Name<br>
-                }
-            </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @foreach (var breed in ViewBag.Breed)
+            {
+                <input type="checkbox" name="DogBreedIds" value="@breed.Id">@breed.Name<br>
+            }
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.YearOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.YearOfBirth, new { htmlAttributes = new { @class = "form-control minmax"}})
-                @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
-            </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.YearOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.YearOfBirth, new { htmlAttributes = new { @class = "form-control minmax" } })
+            @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Sex, htmlAttributes: new { @class = "form-control" } )
-                @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })   
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Sex, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">Slike</label>
-            <div class="col-md-10">
-                <input class="form-control" name="slika" type="file" accept="image/*" /> @*multiple="multiple" za vise slika odjednom*@
-            </div>
-        </div>
-        @*<div class="form-group">
+    </div>
+
+    <div class="form-group">
             @Html.LabelFor(model => model.Adoption, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.Adoption, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Adoption, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div>
+        <label for="files">Dodaj slike: </label>
+        <input name="images" id="files" type="file" multiple />
+        <br />
+        <output id="result" />
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
+</div>
 }
 
 <div>
@@ -90,6 +92,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
     <script>
         $(document).ready(function () {
             $(".minmax").attr({
@@ -97,5 +100,51 @@
                 "min": 2000          
             });
         })
+    </script>
+
+    <script>
+        window.onload = function () {
+
+            //Check File API support
+            if (window.File && window.FileList && window.FileReader) {
+                var filesInput = document.getElementById("files");
+                
+                filesInput.addEventListener("change", function (event) {
+
+                    var files = event.target.files; //FileList object                   
+                    var output = document.getElementById("result");
+
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+
+                        //Only pics
+                        if (!file.type.match('image'))
+                            continue;
+
+                        var picReader = new FileReader();
+
+                        picReader.addEventListener("load", function (event) {
+
+                            var picFile = event.target;
+
+                            var div = document.createElement("div");
+
+                            div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "' " +
+                                " title='" + picFile.name + "' />";
+
+                            output.insertBefore(div, null);
+
+                        });
+
+                        //Read the image
+                        picReader.readAsDataURL(file);
+                    }
+
+                });
+            }
+            else {
+                console.log("Your browser does not support File API");
+            }
+        }
     </script>
 }

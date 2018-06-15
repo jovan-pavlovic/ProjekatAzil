@@ -60,6 +60,16 @@
 
     </dl>
 </div>
+
+@if (Model.Images != null)
+{
+    foreach (var item in Model.Images)
+    {
+        <a href="~/Content/Images/@item.NameOfPicture" data-lightbox="roadtrip"><img src="~/Content/Images/@item.NameOfPicture" class="thumbnail"/></a>
+    }
+}
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

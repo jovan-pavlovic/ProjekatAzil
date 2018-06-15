@@ -7,10 +7,10 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Dogs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Dog</h4>
         <hr />
@@ -27,11 +27,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @foreach(var breed in ViewBag.Breed)
+                @foreach (var breed in ViewBag.Breed)
                 {
-                    
-                    <input type="checkbox" name="DogBreedIds" value="@breed.Id" @if(Model.Breeds.Any(x => x.Id == breed.Id)){ @Html.Raw("checked='checked'") } >@breed.Name<br>
-                    
+
+                    <input type="checkbox" name="DogBreedIds" value="@breed.Id" @if (Model.Breeds.Any(x => x.Id == breed.Id)) { @Html.Raw("checked='checked'") }>@breed.Name<br>
+
                 }
             </div>
         </div>
@@ -54,8 +54,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.Sex,new {@class="form-control" })
-                    @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+                @Html.EnumDropDownListFor(model => model.Sex, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -76,6 +76,23 @@
         </div>
 
         <div class="form-group">
+            <label for="files">Add images: </label>
+            <input name="images" id="files" type="file" multiple />
+            <br />
+            <output id="result" />
+        </div>
+
+
+        @if (Model.Images != null)
+        {
+            foreach (var image in Model.Images)
+            {
+                    @Html.ActionLink("Delete", "DeleteImage", new { dogId= Model.Id, imageId= image.Id })
+                    <img src="~/Content/Images/@image.NameOfPicture" alt="@image.NameOfPicture" height="100" />
+            }
+        }
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
@@ -90,11 +107,57 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-            $(document).ready(function () {
-                $(".minmax").attr({
-                    "max": 2018,
-                    "min": 2000
+        $(document).ready(function () {
+            $(".minmax").attr({
+                "max": (new Date()).getFullYear(),
+                "min": 2000
+            });
+        })
+    </script>
+
+    <script>
+        window.onload = function () {
+
+            //Check File API support
+            if (window.File && window.FileList && window.FileReader) {
+                var filesInput = document.getElementById("files");
+
+                filesInput.addEventListener("change", function (event) {
+
+                    var files = event.target.files; //FileList object
+                    var output = document.getElementById("result");
+
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+
+                        //Only pics
+                        if (!file.type.match('image'))
+                            continue;
+
+                        var picReader = new FileReader();
+
+                        picReader.addEventListener("load", function (event) {
+
+                            var picFile = event.target;
+
+                            var div = document.createElement("div");
+
+                            div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "' " +
+                                " title='" + picFile.name + "' />Description: <input type='text'></input>";
+
+                            output.insertBefore(div, null);
+
+                        });
+
+                        //Read the image
+                        picReader.readAsDataURL(file);
+                    }
+
                 });
-            })
+            }
+            else {
+                console.log("Your browser does not support File API");
+            }
+        }
     </script>
 }

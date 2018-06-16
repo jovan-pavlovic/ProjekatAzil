@@ -8,7 +8,9 @@ namespace ProjekatAzil.Models
 {
     public enum AdoptionStatus
     {
+        [Display(Name = "Free For Adoption")]
         FreeForAdoption,
+        [Display(Name = "Adoption Pending")]
         AdoptionPending,
         Adopted
     }
@@ -24,6 +26,7 @@ namespace ProjekatAzil.Models
         public int Id { get; set; }
         public string Name { get; set;}
         //[Range(2000,2018)] moze i ovo ali sa JS izgleda bolje,vise koda
+        [Display(Name = "Birth Year")]
         public int YearOfBirth { get; set; }
         public int Age { get { return DateTime.Now.Year - YearOfBirth; } }
         public string Description { get; set; }

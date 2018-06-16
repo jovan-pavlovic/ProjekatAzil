@@ -69,14 +69,19 @@ namespace ProjekatAzil.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,YearOfBirth,Description,Sex,Weight,Adoption")] Dog dog, int[] dogBreedIds)
+        public ActionResult Create([Bind(Include = "Id,Name,YearOfBirth,Description,Sex,Weight,Adoption")]Dog dog, int[] dogBreedIds, IEnumerable<HttpPostedFileBase> images)
         {
             ShowBreed();
             if (ModelState.IsValid)
             {
                 dog.Adoption = AdoptionStatus.FreeForAdoption;
 
-                dog.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
+                if (dogBreedIds != null)
+                {
+                    dog.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
+                }
+
+                AddImages(dog, images);
 
                 db.Dogs.Add(dog);
                 
@@ -108,26 +113,46 @@ namespace ProjekatAzil.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Dog dog, int[] dogBreedIds)
+
+        public ActionResult Edit([Bind(Include = "Id,Name,YearOfBirth,Description,Sex,Weight,Adoption")]Dog dog, int[] dogBreedIds, IEnumerable<HttpPostedFileBase> images)
+
         {
             ShowBreed();
             if (ModelState.IsValid)
             {
-               
-                var dogBase = db.Dogs.Find(dog.Id);
-                TryUpdateModel(dogBase, new string[] { "Name", "YearOfBirth", "Description", "Sex", "Weight", "Adoption" });
-                dogBase.Breeds.Clear();
-                if(dogBreedIds != null)
+
+                var dogInDB = db.Dogs.Find(dog.Id);
+
+                TryUpdateModel(dogInDB, new string[] { "Name", "YearOfBirth", "Description", "Sex", "Weight", "Adoption" });
+
+                dogInDB.Breeds.Clear();
+                if (dogBreedIds != null)
                 {
-                    dogBase.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
+                    dogInDB.Breeds = db.Breeds.Where(x => dogBreedIds.Contains(x.Id)).ToList();
                 }
-                
-                db.Entry(dogBase).State = EntityState.Modified;
-                
+
+                AddImages(dogInDB, images);
+
+                //if (dogBase.Breeds.Count() != 0)
+                //{
+                //    var breedsToRemove = dogBase.Breeds.Except(db.Breeds.Where(b => dogBreedIds.Contains(b.Id)));
+                //    breedsToRemove.ToList().ForEach(b => dogBase.Breeds.Remove(b));
+                //}
+
+                //if (dogBreedIds.Count() != 0)
+                //{
+                //    var breedsFromView = db.Breeds.Where(b => dogBreedIds.Contains(b.Id));
+                //    var breedsToAdd = breedsFromView.Except(dogBase.Breeds);
+                //    breedsToAdd.ToList().ForEach(b => dogBase.Breeds.Add(b));
+                //    //InputBreedsForDog(dogBase, dogBreedIds);
+                //}
+
+                db.Entry(dogInDB).State = EntityState.Modified;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(dog);
+            return View(dog.Id);
         }
 
         // GET: Dogs/Delete/5
@@ -164,9 +189,50 @@ namespace ProjekatAzil.Controllers
             }
             base.Dispose(disposing);
         }
+
+
         private void ShowBreed()
         {
             ViewBag.Breed = db.Breeds.ToList();
+        }
+
+        private void AddImages(Dog dog, IEnumerable<HttpPostedFileBase> images)
+        {
+            if (dog != null && images.Count() != 0)
+            {
+                foreach (var item in images)
+                {
+                    if(item != null)
+                    {
+                        var image = new Image
+                        {
+                            NameOfPicture = dog.Id + "_" + Guid.NewGuid() + "_" + item.FileName,
+                            Dog = dog
+                        };
+                        db.Images.Add(image);
+
+                        var imagePath = Server.MapPath($"~/Content/Images/{image.NameOfPicture}");
+                        item.SaveAs(imagePath);
+                    }
+                }
+            }
+        }
+
+        public ActionResult DeleteImage(int dogId, int imageId)
+        {
+            var dog = db.Dogs.FirstOrDefault(d => d.Id == dogId);
+            var image = db.Images.FirstOrDefault(i => i.Id == imageId);
+            if (image != null)
+            {
+                db.Images.Remove(image);
+                db.SaveChanges();
+                var imagePath = Server.MapPath($"~/Content/Images/{image.NameOfPicture}");
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
+            return RedirectToAction("Edit", dog);
         }
     }
 }

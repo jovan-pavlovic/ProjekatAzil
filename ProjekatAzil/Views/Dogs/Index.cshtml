@@ -1,4 +1,4 @@
-﻿@using ProjekatAzil.Models
+@using ProjekatAzil.Models
 @model ProjekatAzil.Models.DogsViewModel
 
 @{
@@ -31,7 +31,9 @@
             @*@Html.ActionLink("Name", "Index", Model.Sorting("Breeds"))    treba da se sredi*@
         </th>
         <th>
-            Age
+
+            @Html.DisplayNameFor(model => model.Age)
+
         </th>
         <th>
             Description
@@ -61,7 +63,7 @@
                 @string.Join(",", item.Breeds.Select(d => d.Name))
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.YearOfBirth)
+                @Html.DisplayFor(modelItem => item.Age)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
@@ -82,6 +84,7 @@
             </td>
         </tr>
     }
+
 
 </table>
 @for (int i = 1; i <= Model.TotalPages; i++)

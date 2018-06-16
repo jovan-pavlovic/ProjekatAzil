@@ -27,6 +27,10 @@ namespace ProjekatAzil.Controllers
             {
                 DogQuery = DogQuery.Where(d => d.Breeds.Any(a => a.Name.Contains(viewModelDogs.DogBreed)));
             }
+            if (viewModelDogs.DogAge.HasValue)
+            {
+                DogQuery = DogQuery.Where(d => (DateTime.Now.Year - d.YearOfBirth) <= viewModelDogs.DogAge);
+            }
             if(viewModelDogs.SortBy != null && viewModelDogs.SortDirection != null)
             {
                 DogQuery = DogQuery.OrderBy(string.Format("{0} {1}", viewModelDogs.SortBy, viewModelDogs.SortDirection));

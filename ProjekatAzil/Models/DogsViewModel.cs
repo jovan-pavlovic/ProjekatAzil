@@ -9,6 +9,7 @@ namespace ProjekatAzil.Models
     {
         public string DogName { get; set; }
         public string DogBreed { get; set; }
+        public int? DogAge { get; set; }
         public string SortBy { get; set; } = "Name";
         public string SortDirection { get; set; } = "ASC";
         public List<Dog> Dogs { get; set; }
@@ -24,6 +25,7 @@ namespace ProjekatAzil.Models
             {
                 DogName,
                 DogBreed,
+                DogAge,
                 SortBy = Sort,
                 SortDirection = Direction,
                 PageSize,
@@ -36,6 +38,7 @@ namespace ProjekatAzil.Models
             {
                 DogName,
                 DogBreed,
+                DogAge,
                 SortBy,
                 SortDirection,
                 PageSize,

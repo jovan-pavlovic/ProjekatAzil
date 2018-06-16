@@ -16,6 +16,7 @@
     <p>
         Dogs Name : @Html.TextBox("DogName")
         Dogs Breed : @Html.TextBox("DogBreed")
+        Dogs Age : @Html.TextBox("DogAge")
         <input type="submit" value="Search" />
     </p>
 }
@@ -28,11 +29,10 @@
             @Html.ActionLink("Name", "Index", Model.Sorting("Name"))
         </th>
         <th>
-            @*@Html.ActionLink("Name", "Index", Model.Sorting("Breeds"))    treba da se sredi*@
         </th>
         <th>
 
-            @Html.DisplayNameFor(model => model.Age)
+            Age
 
         </th>
         <th>

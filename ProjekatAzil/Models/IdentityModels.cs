@@ -13,7 +13,7 @@ namespace ProjekatAzil.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PlaceOfResidence { get; set; }
-        public virtual ICollection<Dog> dogs { get; set; }
+        public virtual ICollection<Dog> Dogs { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -43,5 +43,7 @@ namespace ProjekatAzil.Models
         {
             return new ApplicationDbContext();
         }
+
+        
     }
 }

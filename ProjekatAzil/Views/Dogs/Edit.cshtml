@@ -87,7 +87,7 @@
         {
             foreach (var image in Model.Images)
             {
-                    @Html.ActionLink("Delete", "DeleteImage", new { dogId= Model.Id, imageId= image.Id })
+                    @Html.ActionLink("Delete", "DeleteImage", new {imageId= image.Id })
                     <img src="~/Content/Images/@image.NameOfPicture" alt="@image.NameOfPicture" height="100" />
             }
         }

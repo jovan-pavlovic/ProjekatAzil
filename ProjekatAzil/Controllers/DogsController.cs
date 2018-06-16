@@ -218,10 +218,11 @@ namespace ProjekatAzil.Controllers
             }
         }
 
-        public ActionResult DeleteImage(int dogId, int imageId)
+        public ActionResult DeleteImage(int imageId) //qwebfhasdgfyug
         {
-            var dog = db.Dogs.FirstOrDefault(d => d.Id == dogId);
-            var image = db.Images.FirstOrDefault(i => i.Id == imageId);
+            
+            var image = db.Images.Find(imageId);
+            var dog = image.Dog.Id;
             if (image != null)
             {
                 db.Images.Remove(image);

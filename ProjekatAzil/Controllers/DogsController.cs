@@ -15,10 +15,16 @@ namespace ProjekatAzil.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Dogs
-        public ActionResult Index(DogsViewModel viewModelDogs)
+        public ActionResult Index(DogsViewModel viewModelDogs, bool? wishlist)
         {
             //ShowBreed();
             IQueryable<Dog> DogQuery = db.Dogs;
+
+            if (wishlist.HasValue && wishlist.Value)
+            {
+                DogQuery = DogQuery.Where(d => d.Users.Any(u => u.UserName == User.Identity.Name));
+            }
+
             if(viewModelDogs.DogName != null)
             {
                 DogQuery = DogQuery.Where(d => d.Name.Contains(viewModelDogs.DogName));

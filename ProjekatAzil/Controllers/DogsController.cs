@@ -24,6 +24,10 @@ namespace ProjekatAzil.Controllers
             {
                 DogQuery = DogQuery.Where(d => d.Users.Any(u => u.UserName == User.Identity.Name));
             }
+            if (Request.HttpMethod == "POST")
+            {
+                viewModelDogs.Page = 1;
+            }
 
             if(viewModelDogs.DogName != null)
             {
@@ -80,7 +84,7 @@ namespace ProjekatAzil.Controllers
             ShowBreed();
             if (ModelState.IsValid)
             {
-                dog.Adoption = AdoptionStatus.FreeForAdoption;
+                //dog.Adoption = AdoptionStatus.FreeForAdoption;
 
                 if (dogBreedIds != null)
                 {
@@ -95,7 +99,7 @@ namespace ProjekatAzil.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(dog);
+            return View();
         }
 
         // GET: Dogs/Edit/5

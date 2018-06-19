@@ -24,8 +24,9 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Dogs", "Index", "Dogs")</li>
+                    <li>@Html.ActionLink("Dogs", "Index", new { controller = "Dogs", wishlist = false })</li>
                     <li>@Html.ActionLink("Breed", "Index", "Breeds")</li>
+                    <li>@Html.ActionLink("Wishlist", "Index", new { controller = "Dogs", wishlist = true })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

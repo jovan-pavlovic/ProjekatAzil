@@ -14,9 +14,15 @@ namespace ProjekatAzil
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Wishlist",
-                url: "Dogs/Wishlist",
-                defaults: new { controller = "Dogs", action = "Index", wishlist = true }
+                "Wishlist",
+                "Dogs/Wishlist",
+                new { controller = "Dogs", action = "Index", wishlist = true }
+            );
+
+            routes.MapRoute(
+                "DogsIndex",
+                "Dogs",
+                new { controller = "Dogs", action = "Index", wishlist = false }
             );
 
             routes.MapRoute(

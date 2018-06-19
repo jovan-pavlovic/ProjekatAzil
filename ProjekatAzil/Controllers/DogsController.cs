@@ -161,6 +161,26 @@ namespace ProjekatAzil.Controllers
             return View(dog.Id);
         }
 
+
+        public ActionResult AddToWishlist(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var dog = db.Dogs.Find(id);
+            if (dog == null)
+            {
+                return HttpNotFound();
+            }
+
+            dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name));
+            db.SaveChanges();
+           
+            return RedirectToAction("Index", new { wishlist = true });
+        }
+
         // GET: Dogs/Delete/5
         public ActionResult Delete(int? id)
         {

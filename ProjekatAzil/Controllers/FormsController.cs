@@ -10,7 +10,7 @@ namespace ProjekatAzil.Controllers
     public class FormsController : Controller
     {
         // GET: Forms
-        public ActionResult Index(Days[] days)
+        public ActionResult VolunteerForm(Days[] days)
         {
 
             if (days != null && days.Count() > 0)
@@ -25,6 +25,33 @@ namespace ProjekatAzil.Controllers
 
 
             return View("VolunteerForm");
+        }
+        public ActionResult Donation(DonationType[] donType)
+        {
+
+            if (donType != null && donType.Count() > 0)
+            {
+                var test = (DonationType)donType.Sum(d => (int)d);
+
+                Donation df = new Donation()
+                {
+                    DonationType = test
+                };
+            }
+
+
+            return View("Donation");
+        }
+
+
+        public ActionResult Contact()
+        {
+            return View("Contact");
+        }
+
+        public ActionResult AdoptionDogForm()
+        {
+            return View("AdoptionDogForm");
         }
     }
 }

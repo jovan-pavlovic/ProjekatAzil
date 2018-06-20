@@ -1,0 +1,80 @@
+﻿@model ProjekatAzil.Models.AdoptionDogForm
+@{
+    ViewBag.Title = "AdoptionDogForm";
+}
+
+<h2>AdoptionDogForm</h2>
+
+@using (Html.BeginForm("Index", "Forms", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <p>Ime:</p>
+    <input type="text" name="Model.FirstName" value="">
+    <br />
+    <p>Prezime:</p>
+    <input type="text" name="Model.LastName" value="">
+    <br />
+    <p>Broj Telefona:</p>
+    <input type="number" name="Model.PhoneNumber" value="">
+    <br />
+    <p>E-mail:</p>
+    <input type="email" name="Model.Email">
+    <br />
+    <p>Datum Rodjenja</p>
+    <br />
+    <p>Dan</p> <input type="number" name="Model.DayB" >
+    <p>Mesec</p> <input type="number" name="Model.MonB" >
+    <p>Godina</p> <input type="number" name="Model.YearB" >
+    <br />
+    <p>Zemlja</p>
+    <input type="text" name="Model.Country">
+    <br />
+    <p>Postanski kod</p>
+    <input type="number" name="Model.PostalCode" value="">
+    <br />
+    <p>Adresa</p>
+    <input type="text" name="Model.Address">
+    <br />
+    <p>Da li imate druge ljubimce?</p>
+    <select name="Model.Yes_No">
+        <option value="Model.Yes">Da</option>
+        <option value="Model.No">Ne</option>
+    </select>
+    <br />
+    <p>Koja/e je/su to zivotinje?</p>
+    <input type="text" name="Model.AnimalType" value="">
+    <br />
+    <p>Gde zivite?</p>
+    <select name="Model.Place">
+        <option value="Model.House">Kuca</option>
+        <option value="Model.Apartment">Stan</option>
+        <option value="Model.Farm">Farma</option>
+        <option value="Model.Farm">Duplex</option>
+    </select>
+    <p>Da li je iznajmljno to sta god kncwlcnof</p>
+    <select name="Model.Yes_No">
+        <option value="Model.Yes">Da</option>
+        <option value="Model.No">Ne</option>
+    </select>
+    <br />
+    <p>Da li imate dece?</p>
+    <select name="Model.Yes_No">
+        <option value="Model.Yes">Da</option>
+        <option value="Model.No">Ne</option>
+    </select>
+    <br />
+    <p>Koliko godina imaju Vasa deca?</p>
+    <input type="number" name="Model.AgeChildren" value="">
+    <br />
+    <p>Da li se cesto selite?</p>
+    <select name="Model.Yes_No">
+        <option value="Model.Yes">Da</option>
+        <option value="Model.No">Ne</option>
+    </select>
+    <p>Da li ste cesto odsutni?</p>
+    <br />
+    <p>Komentar:</p>
+    <textarea rows="5" cols="60">
+        </textarea>
+    <br />
+    <input type="submit" value="Submit">
+}

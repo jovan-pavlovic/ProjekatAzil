@@ -14,6 +14,9 @@
     <p>Prezime:</p>
     <input type="text" name="Model.LastName" value="">
     <br />
+    <p>Broj Telefona:</p>
+    <input type="number" name="Model.PhoneNumber" value="">
+    <br />
     <p>E-mail:</p>
     <input type="email" name="Model.Email">
     <br />
@@ -27,16 +30,21 @@
         <option value="Model.Anything">Zavisno od potreba azila</option>
     </select>
 
-        <br />
-        <p>Dani kojima zelim da volontiram:</p>
-        <br />
+    <br />
+    <p>Dani kojima zelim da volontiram:</p>
+    <br />
 
-        foreach (ProjekatAzil.Models.Days weekDay in Enum.GetValues(typeof(ProjekatAzil.Models.Days)))
-        {
-            <input type="checkbox" name="Days" value="@weekDay" />
-            @Html.Label(weekDay.ToString())
-        }
-        <input type="submit" value="Submit">
+    foreach (ProjekatAzil.Models.Days weekDay in Enum.GetValues(typeof(ProjekatAzil.Models.Days)))
+    {
+        <input type="checkbox" name="Days" value="@weekDay" />
+        @Html.Label(weekDay.ToString())
+    }
+    @*<br />
+    <p>Komentar:</p>
+    <textarea rows="5" cols="60">
+    </textarea>*@
+    <br />
+    <input type="submit" value="Submit">
 }
 
 

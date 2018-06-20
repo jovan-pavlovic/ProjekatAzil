@@ -307,6 +307,9 @@
     <Content Include="Views\Breeds\Edit.cshtml" />
     <Content Include="Views\Breeds\Index.cshtml" />
     <Content Include="Views\Forms\VolunteerForm.cshtml" />
+    <Content Include="Views\Forms\Contact.cshtml" />
+    <Content Include="Views\Forms\Donation.cshtml" />
+    <Content Include="Views\Forms\AdoptionDogForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,24 +2,41 @@
 @model ProjekatAzil.Models.DogsViewModel
 
 @{
+    /**/
+
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Our dogs</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm())
+    @using (Html.BeginForm())
+    {
+<p>
+    Dogs Name : @Html.TextBox("DogName")
+    Dogs Breed : @Html.TextBox("DogBreed")
+    <input type="submit" value="Search" />
+</p>
+    }
+
+@if (Model.Dogs.Count() == 0)
 {
+
+    @Html.Raw("Sorry, no dogs to show.")
+
     <p>
         Dogs Name : @Html.TextBox("DogName")
         Dogs Breed : @Html.TextBox("DogBreed")
         Dogs Age : @Html.TextBox("DogAge")
         <input type="submit" value="Search" />
     </p>
+
 }
+else
+{ 
 <table class="table">
     <tr>
         <th>
@@ -31,9 +48,7 @@
         <th>
         </th>
         <th>
-
             Age
-
         </th>
         <th>
             Description
@@ -80,15 +95,18 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Wishlist", "AddToWishlist", new { id = item.Id })
             </td>
         </tr>
     }
 
 
 </table>
-@for (int i = 1; i <= Model.TotalPages; i++)
-{
-    @Html.ActionLink(i.ToString(), "Index", Model.Pagination(i));
-    @Html.Raw("|")
+    for (int i = 1; i <= Model.TotalPages; i++)
+    {
+@Html.ActionLink(i.ToString(), "Index", Model.Pagination(i));
+@Html.Raw("|")
+    }
 }
+

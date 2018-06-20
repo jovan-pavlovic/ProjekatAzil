@@ -15,10 +15,20 @@ namespace ProjekatAzil.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Dogs
-        public ActionResult Index(DogsViewModel viewModelDogs)
+        public ActionResult Index(DogsViewModel viewModelDogs, bool? wishlist)
         {
             //ShowBreed();
             IQueryable<Dog> DogQuery = db.Dogs;
+
+            if (wishlist.HasValue && wishlist.Value)
+            {
+                DogQuery = DogQuery.Where(d => d.Users.Any(u => u.UserName == User.Identity.Name));
+            }
+            if (Request.HttpMethod == "POST")
+            {
+                viewModelDogs.Page = 1;
+            }
+
             if(viewModelDogs.DogName != null)
             {
                 DogQuery = DogQuery.Where(d => d.Name.Contains(viewModelDogs.DogName));
@@ -78,7 +88,7 @@ namespace ProjekatAzil.Controllers
             ShowBreed();
             if (ModelState.IsValid)
             {
-                dog.Adoption = AdoptionStatus.FreeForAdoption;
+                //dog.Adoption = AdoptionStatus.FreeForAdoption;
 
                 if (dogBreedIds != null)
                 {
@@ -93,7 +103,7 @@ namespace ProjekatAzil.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(dog);
+            return View();
         }
 
         // GET: Dogs/Edit/5
@@ -157,6 +167,26 @@ namespace ProjekatAzil.Controllers
                 return RedirectToAction("Index");
             }
             return View(dog.Id);
+        }
+
+
+        public ActionResult AddToWishlist(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var dog = db.Dogs.Find(id);
+            if (dog == null)
+            {
+                return HttpNotFound();
+            }
+
+            dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name));
+            db.SaveChanges();
+           
+            return RedirectToAction("Index", new { wishlist = true });
         }
 
         // GET: Dogs/Delete/5

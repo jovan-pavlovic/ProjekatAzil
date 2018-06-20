@@ -32,13 +32,13 @@ namespace ProjekatAzil.Migrations
             //
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            if (!roleManager.RoleExists(Roles.ADMIN))
+            if (!roleManager.RoleExists(RolesCfg.ADMIN))
             {
-                roleManager.Create(new IdentityRole(Roles.ADMIN));
+                roleManager.Create(new IdentityRole(RolesCfg.ADMIN));
             }
-            if (!roleManager.RoleExists(Roles.USER))
+            if (!roleManager.RoleExists(RolesCfg.USER))
             {
-                roleManager.Create(new IdentityRole(Roles.USER));
+                roleManager.Create(new IdentityRole(RolesCfg.USER));
             }
 
             var adminEmail = WebConfigurationManager.AppSettings["AdminEmail"];
@@ -57,7 +57,7 @@ namespace ProjekatAzil.Migrations
                 };
                 context.Users.Add(admin);
                 context.SaveChanges();
-                adminManager.AddToRole(admin.Id, Roles.ADMIN);
+                adminManager.AddToRole(admin.Id, RolesCfg.ADMIN);
             }
 
         }

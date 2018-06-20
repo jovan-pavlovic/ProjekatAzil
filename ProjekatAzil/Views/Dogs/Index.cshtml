@@ -13,26 +13,12 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-    @using (Html.BeginForm())
-    {
-<p>
-    Dogs Name : @Html.TextBox("DogName")
-    Dogs Breed : @Html.TextBox("DogBreed")
-    <input type="submit" value="Search" />
-</p>
-    }
+
 
 @if (Model.Dogs.Count() == 0)
 {
 
     @Html.Raw("Sorry, no dogs to show.")
-
-    <p>
-        Dogs Name : @Html.TextBox("DogName")
-        Dogs Breed : @Html.TextBox("DogBreed")
-        Dogs Age : @Html.TextBox("DogAge")
-        <input type="submit" value="Search" />
-    </p>
 
 }
 else

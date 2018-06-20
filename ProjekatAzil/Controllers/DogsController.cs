@@ -183,7 +183,7 @@ namespace ProjekatAzil.Controllers
                 return HttpNotFound();
             }
 
-            dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name));
+            dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name)); //q
             db.SaveChanges();
            
             return RedirectToAction("Index", new { wishlist = true });

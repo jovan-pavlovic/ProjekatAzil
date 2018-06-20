@@ -77,7 +77,15 @@
 }
 
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @if (Request.UrlReferrer.AbsolutePath.Equals(Url.RouteUrl("Wishlist")))
+            {
+                @Html.ActionLink("Back to List", "Index", new { wishlist = true })
+            }
+            else
+            {
+                @Html.ActionLink("Back to List", "Index")
+            }
+
+        </p>

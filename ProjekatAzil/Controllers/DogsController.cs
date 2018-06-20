@@ -21,10 +21,14 @@ namespace ProjekatAzil.Controllers
             
             IQueryable<Dog> DogQuery = db.Dogs;
 
+            viewModelDogs.Wishlist = false;
+
             if (wishlist.HasValue && wishlist.Value)
             {
                 DogQuery = DogQuery.Where(d => d.Users.Any(u => u.UserName == User.Identity.Name));
+                viewModelDogs.Wishlist = true;
             }
+
             if (Request.HttpMethod == "POST")
             {
                 viewModelDogs.Page = 1;
@@ -158,6 +162,7 @@ namespace ProjekatAzil.Controllers
         }
 
 
+
         public ActionResult AddToWishlist(int? id)
         {
             if (id == null)
@@ -176,6 +181,7 @@ namespace ProjekatAzil.Controllers
            
             return RedirectToAction("Index", new { wishlist = true });
         }
+
 
         // GET: Dogs/Delete/5
         public ActionResult Delete(int? id)
@@ -257,5 +263,47 @@ namespace ProjekatAzil.Controllers
             }
             return RedirectToAction("Edit", dog);
         }
+
+
+        public ActionResult AddToWishlist(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var dog = db.Dogs.Find(id);
+            if (dog == null)
+            {
+                return HttpNotFound();
+            }
+
+            dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name));
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { wishlist = true });
+        }
+
+        public ActionResult RemoveFromWishlist(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var dog = db.Dogs.Find(id);
+            if (dog == null)
+            {
+                return HttpNotFound();
+            }
+
+            dog.Users.Remove(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name));
+            db.SaveChanges();
+
+            return RedirectToAction("Index", new { wishlist = true });
+        }
+
+
     }
 }

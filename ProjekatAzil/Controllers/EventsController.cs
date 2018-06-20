@@ -98,7 +98,10 @@ namespace ProjekatAzil.Controllers
                 TryUpdateModel(eventInDB, new string[] { "Title", "Description" });
 
                 eventInDB.Dogs.Clear();
-                
+                if(DogId == "")
+                {
+                    DogId = null;
+                }
                 if (DogId != null)
                 {
                     var dogList = DogId.Split(',').Select(int.Parse).ToList();

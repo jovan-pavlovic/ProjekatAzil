@@ -27,13 +27,6 @@
 
     @Html.Raw("Sorry, no dogs to show.")
 
-    <p>
-        Dogs Name : @Html.TextBox("DogName")
-        Dogs Breed : @Html.TextBox("DogBreed")
-        Dogs Age : @Html.TextBox("DogAge")
-        <input type="submit" value="Search" />
-    </p>
-
 }
 else
 { 
@@ -93,10 +86,23 @@ else
                 @Html.DisplayFor(modelItem => item.Adoption)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                @Html.ActionLink("Wishlist", "AddToWishlist", new { id = item.Id })
+                @if (Model.Wishlist == false)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.Raw("| ")
+                    @Html.ActionLink("Wishlist", "AddToWishlist", new { id = item.Id })
+                    @Html.Raw("| ")
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.Raw("|")
+                }
+                else
+                {
+                    @Html.ActionLink("Remove", "RemoveFromWishlist", new { id = item.Id })
+                    @Html.Raw("|")
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+
+
             </td>
         </tr>
     }

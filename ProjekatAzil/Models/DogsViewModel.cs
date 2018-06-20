@@ -14,6 +14,7 @@ namespace ProjekatAzil.Models
         public string SortDirection { get; set; } = "ASC";
         public List<Dog> Dogs { get; set; }
         public List<Event> Events { get; set; }
+        public bool Wishlist { get; set; }
 
         public int Count { get; set; }
         public int PageSize { get; set; } = 10;

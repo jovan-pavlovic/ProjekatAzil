@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ProjekatAzil.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,13 +22,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Dogs", "Index", new { controller = "Dogs", wishlist = false })</li>
-                    <li>@Html.ActionLink("Breed", "Index", "Breeds")</li>
-                    <li>@Html.ActionLink("Wishlist", "Index", new { controller = "Dogs", wishlist = true })</li>
-                    <li>@Html.ActionLink("Event", "Index", "Events")</li>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Dogs", "Index",new {controller = "Dogs",wishlist = false })</li>
+                    @if (User.IsInRole(RolesCfg.ADMIN))
+                    {
+                        
+                        
+                        <li>@Html.ActionLink("Breed", "Index", "Breeds")</li>
+                        <li>@Html.ActionLink("Wishlist", "Index", new { controller = "Dogs", wishlist = true })</li>
+                        <li>@Html.ActionLink("Event", "Index", "Events")</li>
+                    }
+                    else if(User.IsInRole(RolesCfg.USER))
+                    {
+                        
+                        <li>@Html.ActionLink("Wishlist", "Index", new { controller = "Dogs", wishlist = true })</li>
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

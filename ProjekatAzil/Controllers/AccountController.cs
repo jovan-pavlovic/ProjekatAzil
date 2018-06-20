@@ -156,7 +156,7 @@ namespace ProjekatAzil.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    UserManager.AddToRoles(user.Id, Roles.USER);
+                    UserManager.AddToRoles(user.Id, RolesCfg.USER);
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

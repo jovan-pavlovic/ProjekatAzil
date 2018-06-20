@@ -15,9 +15,10 @@ namespace ProjekatAzil.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Dogs
+        [AllowAnonymous]
         public ActionResult Index(DogsViewModel viewModelDogs, bool? wishlist)
         {
-            //ShowBreed();
+            
             IQueryable<Dog> DogQuery = db.Dogs;
 
             if (wishlist.HasValue && wishlist.Value)
@@ -57,6 +58,7 @@ namespace ProjekatAzil.Controllers
         }
 
         // GET: Dogs/Details/5
+        [Authorize(Roles = RolesCfg.ADMIN +"," + RolesCfg.USER)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -88,7 +90,6 @@ namespace ProjekatAzil.Controllers
             ShowBreed();
             if (ModelState.IsValid)
             {
-                //dog.Adoption = AdoptionStatus.FreeForAdoption;
 
                 if (dogBreedIds != null)
                 {
@@ -147,19 +148,6 @@ namespace ProjekatAzil.Controllers
 
                 AddImages(dogInDB, images);
 
-                //if (dogBase.Breeds.Count() != 0)
-                //{
-                //    var breedsToRemove = dogBase.Breeds.Except(db.Breeds.Where(b => dogBreedIds.Contains(b.Id)));
-                //    breedsToRemove.ToList().ForEach(b => dogBase.Breeds.Remove(b));
-                //}
-
-                //if (dogBreedIds.Count() != 0)
-                //{
-                //    var breedsFromView = db.Breeds.Where(b => dogBreedIds.Contains(b.Id));
-                //    var breedsToAdd = breedsFromView.Except(dogBase.Breeds);
-                //    breedsToAdd.ToList().ForEach(b => dogBase.Breeds.Add(b));
-                //    //InputBreedsForDog(dogBase, dogBreedIds);
-                //}
 
                 db.Entry(dogInDB).State = EntityState.Modified;
 
@@ -183,7 +171,7 @@ namespace ProjekatAzil.Controllers
                 return HttpNotFound();
             }
 
-            dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name));
+            dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name)); 
             db.SaveChanges();
            
             return RedirectToAction("Index", new { wishlist = true });

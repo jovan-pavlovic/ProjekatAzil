@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProjekatAzil.Models
 {
-    public class Roles
+    public class RolesCfg
     {
         public const string ADMIN = "ADMIN";
         public const string USER = "USER";

@@ -17,7 +17,7 @@ namespace ProjekatAzil
                 name: "IndexDogs",
                 url: "Dogs",
                 defaults: new { controller = "Dogs", action = "Index", wishlist = false, id = UrlParameter.Optional }
-            );
+            );//proba
 
             routes.MapRoute(
                 name: "Wishlist",

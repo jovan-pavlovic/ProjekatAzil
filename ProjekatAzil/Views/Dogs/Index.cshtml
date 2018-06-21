@@ -9,20 +9,31 @@
 
 <h2>Our dogs</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (Model.Wishlist == false)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 
 
+@using (Html.BeginForm())
+    {
+    <p>
+    Dogs Name: @Html.TextBox("DogName")
+    Dogs Breed: @Html.TextBox("DogBreed")
+    <input type = "submit" value = "Search" />
+    </p>
+   }
 
-@if (Model.Dogs.Count() == 0)
+@if(Model.Dogs.Count() == 0)
 {
 
     @Html.Raw("Sorry, no dogs to show.")
 
 }
 else
-{ 
+{
 <table class="table">
     <tr>
         <th>
@@ -32,6 +43,7 @@ else
             @Html.ActionLink("Name", "Index", Model.Sorting("Name"))
         </th>
         <th>
+            Breed
         </th>
         <th>
             Age
@@ -82,24 +94,20 @@ else
 
                 @if (Model.Wishlist == false)
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", title = "Edit" })
                     @Html.Raw("| ")
-                    @Html.ActionLink("Wishlist", "AddToWishlist", new { id = item.Id })
+                    @Html.ActionLink(" ", "AddToWishlist", new { id = item.Id }, new { @class = "glyphicon glyphicon-heart", title = "Add to wishlist" })
                     @Html.Raw("| ")
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Remove" })
                     @Html.Raw("|")
                 }
                 else
                 {
-                    @Html.ActionLink("Remove", "RemoveFromWishlist", new { id = item.Id })
+                    @Html.ActionLink(" ", "RemoveFromWishlist", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Remove" })
                     @Html.Raw("|")
                 }
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "glyphicon glyphicon-list-alt", title = "Details" })
 
-                @Html.ActionLink(" ", "Edit", new { id = item.Id},new {@class = "glyphicon glyphicon-pencil",title = "Edit" }) |
-                @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "glyphicon glyphicon-list-alt",title = "Details" }) |
-                @Html.ActionLink(" ", "Delete", new { id = item.Id },new { @class = "glyphicon glyphicon-remove",title = "Remove"}) |
-                @Html.ActionLink(" ", "AddToWishlist", new { id = item.Id }, new {@class = "glyphicon glyphicon-heart",title = "Add to wishlist" })
 
             </td>
         </tr>

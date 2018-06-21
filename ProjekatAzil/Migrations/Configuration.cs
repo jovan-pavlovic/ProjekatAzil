@@ -31,6 +31,50 @@ namespace ProjekatAzil.Migrations
             //    );
             //
 
+            context.Breeds.AddOrUpdate(
+                new Breed { Name = "Akita" },
+                new Breed { Name = "Alaskan Malamute" },
+                new Breed { Name = "Basset Hound" },
+                new Breed { Name = "Beagle" },
+                new Breed { Name = "Bloodhound" },
+                new Breed { Name = "Boston Terrier" },
+                new Breed { Name = "Chihuahua" },
+                new Breed { Name = "Golden Retriever" },
+                new Breed { Name = "Jack Russell Terrier" },
+                new Breed { Name = "Pug" },
+                new Breed { Name = "Maltese" },
+                new Breed { Name = "French Bulldog" },
+                new Breed { Name = "Bull Terrier" },
+                new Breed { Name = "Dalmatian" },
+                new Breed { Name = "Bulldog" }
+                );
+
+            context.Dogs.AddOrUpdate(
+                new Dog { Name = "Bobi", YearOfBirth = 2012, Weight = 3 },
+                new Dog { Name = "Marli", YearOfBirth = 2017, Weight = 5 },
+                new Dog { Name = "Rex", YearOfBirth = 2005, Weight = 1 },
+                new Dog { Name = "Bobi", YearOfBirth = 2016, Weight = 8 },
+                new Dog { Name = "Rufus", YearOfBirth = 2012, Weight = 10 },
+                new Dog { Name = "Rocco", YearOfBirth = 2001, Weight = 5 },
+                new Dog { Name = "Peanut", YearOfBirth = 2005, Weight = 7 },
+                new Dog { Name = "Shadow", YearOfBirth = 2018, Weight = 1 },
+                new Dog { Name = "Zeus", YearOfBirth = 2015, Weight = 1 },
+                new Dog { Name = "Cody", YearOfBirth = 2015, Weight = 7 },
+                new Dog { Name = "Buddy", YearOfBirth = 2012, Weight = 5 },
+                new Dog { Name = "Bubba", YearOfBirth = 2016, Weight = 1 },
+                new Dog { Name = "Leo", YearOfBirth = 2015, Weight = 7 },
+                new Dog { Name = "Tank", YearOfBirth = 2016, Weight = 8 },
+                new Dog { Name = "Yoda", YearOfBirth = 2012, Weight = 5 },
+                new Dog { Name = "Simba", YearOfBirth = 2015, Weight = 8 },
+                new Dog { Name = "Coco", YearOfBirth = 2017, Weight = 7 },
+                new Dog { Name = "Loki", YearOfBirth = 2014, Weight = 5 },
+                new Dog { Name = "Champ", YearOfBirth = 2015, Weight = 8 },
+                new Dog { Name = "Buddy", YearOfBirth = 2012, Weight = 5 },
+                new Dog { Name = "Moose", YearOfBirth = 2017, Weight = 8 },
+                new Dog { Name = "Oscar", YearOfBirth = 2015, Weight = 5 },
+                new Dog { Name = "Buddy", YearOfBirth = 2012, Weight = 8 }
+                );
+
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             if (!roleManager.RoleExists(RolesCfg.ADMIN))
             {

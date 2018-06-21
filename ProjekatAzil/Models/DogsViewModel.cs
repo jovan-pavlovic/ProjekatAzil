@@ -31,7 +31,8 @@ namespace ProjekatAzil.Models
                 SortBy = Sort,
                 SortDirection = Direction,
                 PageSize,
-                Page
+                Page,
+                Wishlist
             };
         }
         public object Pagination(int Page)
@@ -44,7 +45,8 @@ namespace ProjekatAzil.Models
                 SortBy,
                 SortDirection,
                 PageSize,
-                Page
+                Page,
+                Wishlist
             };
         }
     }

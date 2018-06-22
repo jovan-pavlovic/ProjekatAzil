@@ -19,13 +19,28 @@ namespace ProjekatAzil
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            //          "~/Scripts/bootstrap.js",
+            //          "~/Scripts/respond.js"));
 
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/bootstrap.css",
+            //          "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/easing.js",
+                "~/Scripts/move-top.js",
+                "~/Scripts/lightbox-plus-jquery.min.js",
+                "~/Scripts/jquery-1.11.1.min.js",
+                "~/Scripts/responsiveslides.min.js",
+                "~/Scripts/SmoothScroll.min.js"
+                ));
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+               "~/Content/bootstrap.css",
+               "~/Content/style.css",
+               "~/Content/lightbox.css",
+               "~/Content/font-awesome.css"));
         }
     }
 }

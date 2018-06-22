@@ -6819,3 +6819,9 @@ td.visible-print {
     height: 100px;
     margin: 10px;
 }
+
+.threecolumns {
+    -webkit-columns: 100px 3; /* Chrome, Safari, Opera */
+    -moz-columns: 100px 3; /* Firefox */
+    columns: 100px 3;
+}

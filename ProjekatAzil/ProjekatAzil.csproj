@@ -205,6 +205,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BreedsController.cs" />
     <Compile Include="Controllers\DogsController.cs" />
+
+    <Compile Include="Controllers\FormsController.cs" />
+
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -225,6 +228,7 @@
     <Compile Include="Models\Dog.cs" />
     <Compile Include="Models\DogsViewModel.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Form.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -307,11 +311,18 @@
     <Content Include="Views\Breeds\Details.cshtml" />
     <Content Include="Views\Breeds\Edit.cshtml" />
     <Content Include="Views\Breeds\Index.cshtml" />
+
+    <Content Include="Views\Forms\VolunteerForm.cshtml" />
+    <Content Include="Views\Forms\Contact.cshtml" />
+    <Content Include="Views\Forms\Donation.cshtml" />
+    <Content Include="Views\Forms\AdoptionDogForm.cshtml" />
+
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6581,4 +6581,8 @@ button.close {
     display: none !important;
   }
 }
-/*# sourceMappingURL=bootstrap.css.map */
+
+.thumbnail {
+    height: 100px;
+    margin: 10px;
+}

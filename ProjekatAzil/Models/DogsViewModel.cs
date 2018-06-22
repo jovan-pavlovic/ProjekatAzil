@@ -9,9 +9,12 @@ namespace ProjekatAzil.Models
     {
         public string DogName { get; set; }
         public string DogBreed { get; set; }
+        public int? DogAge { get; set; }
         public string SortBy { get; set; } = "Name";
         public string SortDirection { get; set; } = "ASC";
         public List<Dog> Dogs { get; set; }
+        public List<Event> Events { get; set; }
+        public bool Wishlist { get; set; }
 
         public int Count { get; set; }
         public int PageSize { get; set; } = 10;
@@ -24,10 +27,12 @@ namespace ProjekatAzil.Models
             {
                 DogName,
                 DogBreed,
+                DogAge,
                 SortBy = Sort,
                 SortDirection = Direction,
                 PageSize,
-                Page
+                Page,
+                Wishlist
             };
         }
         public object Pagination(int Page)
@@ -36,10 +41,12 @@ namespace ProjekatAzil.Models
             {
                 DogName,
                 DogBreed,
+                DogAge,
                 SortBy,
                 SortDirection,
                 PageSize,
-                Page
+                Page,
+                Wishlist
             };
         }
     }

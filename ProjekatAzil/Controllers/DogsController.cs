@@ -16,17 +16,15 @@ namespace ProjekatAzil.Controllers
 
         // GET: Dogs
         [AllowAnonymous]
-        public ActionResult Index(DogsViewModel viewModelDogs, bool? wishlist)
+        public ActionResult Index(DogsViewModel viewModelDogs)
         {
             
             IQueryable<Dog> DogQuery = db.Dogs;
 
-            viewModelDogs.Wishlist = wishlist.Value;
 
-            if (wishlist.HasValue && wishlist.Value)
+            if (viewModelDogs.Wishlist.HasValue && viewModelDogs.Wishlist.Value)
             {
                 DogQuery = DogQuery.Where(d => d.Users.Any(u => u.UserName == User.Identity.Name));
-                viewModelDogs.Wishlist = true;
             }
 
             if (Request.HttpMethod == "POST")

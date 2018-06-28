@@ -11,52 +11,56 @@
 }
 <!-- //banner -->
 <!-- gallery -->
+<br />
+<br/>
+    <div class="container">
+       
+        @if (Model.Wishlist == false)
+        {
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        }
+        <br/>
+      
+        @using (Html.BeginForm())
+        {
+            <p>
+                Dogs Name: @Html.TextBox("DogName")
+                Dogs Breed: @Html.TextBox("DogBreed")
+                <input type="submit" value="Search" />
+            </p>
+        }
 
-@if (Model.Wishlist == false)
-{
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
+        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list"  })
+        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th" })
 
-@using (Html.BeginForm())
-{
-    <p>
-        Dogs Name: @Html.TextBox("DogName")
-        Dogs Breed: @Html.TextBox("DogBreed")
-        <input type="submit" value="Search" />
-    </p>
-}
+        @if (Model.Dogs.Count() == 0)
+        {
 
-@Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list" })
-@Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th" })
+            @Html.Raw("Sorry, no dogs to show.")
 
-@if (Model.Dogs.Count() == 0)
-{
+        }
+        else
+        {
+            if (Model.ListMode == true)
+            {
+                @Html.Partial("_IndexListMode")
+            }
+            else
+            {
+                @Html.Partial("_IndexGridMode")
+            }
+        }
+        <!-- //gallery -->
 
-    @Html.Raw("Sorry, no dogs to show.")
+        @if (Model.Wishlist == false)
+        {
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        }
 
-}
-else
-{
-    if (Model.ListMode == true)
-    {
-        @Html.Partial("_IndexListMode")
-    }
-    else
-    {
-        @Html.Partial("_IndexGridMode")
-    }
-}
-<!-- //gallery -->
-
-@if (Model.Wishlist == false)
-{
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
-
-
+    </div>
 
 

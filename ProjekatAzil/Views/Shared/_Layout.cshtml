@@ -10,15 +10,15 @@
 </head>
 
 <body>
-    <!-- banner -->
+    <!-- header -->
+    <div class="banner">
         <div class="header">
             <div class="container">
                 <div class="header-left">
                     <div class="w3layouts-logo">
-                        <img src="~/images/logo.png" height="100px" width="200px" />
-                        <h1>
-                            @Html.ActionLink("Dog Club", "Index", "Home")
-                        </h1>
+                        <a href='@Url.Action("Index", "Home")'>
+                            <img src="~/images/logo.png" height="80" />
+                        </a>
                     </div>
                 </div>
                 <div class="header-right">
@@ -37,12 +37,13 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
 
-                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                                    <li>@Html.ActionLink("Dogs", "Index", "Dogs")</li>
-                                    <li>@Html.ActionLink("Breed", "Index", "Breeds")</li>
+                                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                                    <li><a href="@Url.Action("About", "Home")">About</a></li>
+                                    <li><a href="@Url.Action("Index", "Dogs")">Dogs</a></li>
+                                    <li><a href="@Url.Action("Index", "Breeds")">Breeds</a></li>
                                     <li class="">
-                                        <a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact<span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-
+                                           expanded="false">Contact<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a class="hvr-bounce-to-bottom">@Html.ActionLink("Adoption", "AdoptionDogForm", "Forms")</a></li>
                                             <li><a class="hvr-bounce-to-bottom">@Html.ActionLink("Voulunteer", "VolunteerForm", "Forms")</a></li>
@@ -68,31 +69,10 @@
                 <div class="clearfix"> </div>
             </div>
         </div>
-        <!-- banner -->
-       
-        <script src="js/responsiveslides.min.js"></script>
-        <script>
-            // You can also use "$(window).load(function() {"
-            $(function () {
-                // Slideshow 4
-                $("#slider4").responsiveSlides({
-                    auto: true,
-                    pager: true,
-                    nav: true,
-                    speed: 500,
-                    namespace: "callbacks",
-                    before: function () {
-                        $('.events').append("<li>before event fired.</li>");
-                    },
-                    after: function () {
-                        $('.events').append("<li>after event fired.</li>");
-                    }
-                });
-
-            });
-        </script>
-
+        @RenderSection("HeaderBottom", required: false)
     </div>
+    <!-- header -->
+
 
     @RenderBody()
 
@@ -153,10 +133,13 @@
         </div>
     </div>
     <!-- //copyright -->
-    <script src="js/responsiveslides.min.js"></script>
-    <script src="js/SmoothScroll.min.js"></script>
-    <script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
     <!-- here stars scrolling icon -->
     <script type="text/javascript">
         $(document).ready(function () {
@@ -176,9 +159,6 @@
     <!-- //here ends scrolling icon -->
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 
 </body>
 

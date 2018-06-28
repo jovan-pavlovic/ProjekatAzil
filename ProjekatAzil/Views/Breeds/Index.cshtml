@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjekatAzil.Models.Breed>
+﻿@model ProjekatAzil.Models.BreedViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -9,25 +9,42 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Breed Name: @Html.TextBox("BreedName")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Name", "Index", Model.Sorting("Name"))
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", title = "Edit" }) |
-            @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "glyphicon glyphicon-list-alt", title = "Details" }) |
-            @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Remove" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Breeds)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", title = "Edit" }) |
+                @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "glyphicon glyphicon-list-alt", title = "Details" }) |
+                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Remove" })
+            </td>
+        </tr>
+    }
+
+
 
 </table>
+@for (int i = 1; i <= Model.TotalPages; i++)
+{
+    @Html.ActionLink(i.ToString(), "Index", Model.Pagination(i));
+    @Html.Raw("|")
+}

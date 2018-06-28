@@ -1,17 +1,21 @@
 ﻿@model ProjekatAzil.Models.Breed
 
-@{
-    ViewBag.Title = "Edit";
+@section HeaderBottom{
+    <div class="about-heading">
+        <div class="container">
+            <h2>Delete</h2>
+        </div>
+    </div>
 }
 
-<h2>Edit</h2>
-
-
+<div class="container">
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
+        <br/>
+        <br/>
         <h4>Breed</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -40,3 +44,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+    <br/>
+    <br/>
+    </div>

@@ -21,9 +21,8 @@ namespace ProjekatAzil.Models
         public string AnimalType { get; set; }
         public int AgeChildren { get; set; }
 
-        public int DayB { get; set; }
-        public int MonB { get; set; }
-        public int YearB { get; set; }
+        public string DayB { get; set; }
+        
     }   
 
     public enum Services

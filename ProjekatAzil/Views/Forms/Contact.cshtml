@@ -1,28 +1,40 @@
 ﻿@model ProjekatAzil.Models.Contact
-@{
-    ViewBag.Title = "Contact";
+@section HeaderBottom{
+<div class="about-heading">
+    <div class="container">
+        <h2>Contact Form</h2>
+    </div>
+</div>
 }
+<div class="container">
 
-<h2>Contact Form</h2>
-
-@using (Html.BeginForm("Index", "Forms", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <p>Ime:</p>
-    <input type="text" name="Model.FirstName" value="">
-    <br />
-    <p>Prezime:</p>
-    <input type="text" name="Model.LastName" value="">
-    <br />
-    <p>Broj Telefona:</p>
-    <input type="number" name="Model.PhoneNumber" value="">
-    <br/>
-    <p>E-mail:</p>
-    <input type="email" name="Model.Email">
-    @*<br />
-    <p>Komentar:</p>
-    <textarea rows="5" cols="60">
-    </textarea>*@
-    <br/>
-    <input type="submit" value="Submit">
-
-}
+    @using (Html.BeginForm("Index", "Forms", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <br />
+        <br />
+        <p>Ime:</p>
+        <input type="text" name="Model.FirstName" value="">
+        <br />
+        <br />
+        <p>Prezime:</p>
+        <input type="text" name="Model.LastName" value="">
+        <br />
+        <br />
+        <p>Broj Telefona:</p>
+        <input type="number" name="Model.PhoneNumber" value="">
+        <br />
+        <br />
+        <p>E-mail:</p>
+        <input type="email" name="Model.Email">
+        <br />
+        <br />
+        <p>Coment:</p>
+        <textarea rows="5" cols="60">
+    </textarea>
+        <br />
+        <br />
+        <input type="submit" value="Submit">
+        <br />
+        <br />
+    }
+</div>

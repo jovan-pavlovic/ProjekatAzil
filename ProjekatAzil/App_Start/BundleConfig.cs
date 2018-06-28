@@ -29,10 +29,10 @@ namespace ProjekatAzil
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js",
+                "~/Scripts/jquery-3.3.1.min.js",
                 "~/Scripts/easing.js",
                 "~/Scripts/move-top.js",
                 "~/Scripts/lightbox-plus-jquery.min.js",
-                "~/Scripts/jquery-1.11.1.min.js",
                 "~/Scripts/responsiveslides.min.js",
                 "~/Scripts/SmoothScroll.min.js"
                 ));

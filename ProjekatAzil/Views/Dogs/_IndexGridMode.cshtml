@@ -10,12 +10,7 @@
                 <div class="col-md-4 gallery-grid">
                     <div class="grid">
                         <figure class="effect-apollo">
-                            <a class="example-image-link" href="images/g1.jpg" data-lightbox="example-set" data-title="Lorem ipsum dolor sit amet, consectetur adipiscing
-
-elit. Duis ut sem ac lectus mattis sagittis. Donec pulvinar quam sit amet est vestibulum volutpat. Phasellus sed nibh odio. Phasellus posuere at purus sit amet porttitor. Cras
-
-euismod egestas enim eget molestie. Aenean ornare condimentum odio, in lacinia felis finibus non. Nam faucibus libero et lectus finibus, sed porttitor velit pellentesque.">
-                                <img src="~/Content/Images/@item.MainImage" alt="" />
+                            <a class="example-image-link" href='@Url.Action("Details", new { controller = "Dogs", id = item.Id })'><img src="~/Content/Images/@item.MainImage" alt="" height="300" />
                                 <figcaption>
                                     <p>
                                         @Html.DisplayFor(modelItem => item.Name)
@@ -28,6 +23,7 @@ euismod egestas enim eget molestie. Aenean ornare condimentum odio, in lacinia f
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                         @Html.Raw("|")
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Add to Wishlist", "AddToWishlist", new { id = item.Id })
 
                     </div>
                 </div>

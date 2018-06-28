@@ -60,7 +60,7 @@ namespace ProjekatAzil.Controllers
         }
 
         // GET: Dogs/Details/5
-        [Authorize(Roles = RolesCfg.ADMIN +"," + RolesCfg.USER)]
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -261,7 +261,7 @@ namespace ProjekatAzil.Controllers
             dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name));
             db.SaveChanges();
 
-            return RedirectToAction("Index", new { wishlist = true });
+            return RedirectToAction("Index", new { wishlist = false });
         }
 
         public ActionResult RemoveFromWishlist(int? id)

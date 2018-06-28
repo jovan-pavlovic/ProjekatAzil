@@ -54,9 +54,9 @@ namespace ProjekatAzil
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "2074119275963381",
+               appSecret: "90f2718222197cc33312e9be4918d6a5");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

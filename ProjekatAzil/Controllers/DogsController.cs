@@ -81,6 +81,7 @@ namespace ProjekatAzil.Controllers
         public ActionResult Create()
         {
             ShowBreed();
+            ViewBag.BreedCount = db.Breeds.Count();
             return View();
         }
 
@@ -114,7 +115,7 @@ namespace ProjekatAzil.Controllers
         // GET: Dogs/Edit/5
         public ActionResult Edit(int? id)
         {
-            ShowBreed();
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -124,6 +125,8 @@ namespace ProjekatAzil.Controllers
             {
                 return HttpNotFound();
             }
+            ShowBreed();
+            ViewBag.BreedCount = db.Breeds.Count();
             return View(dog);
         }
 

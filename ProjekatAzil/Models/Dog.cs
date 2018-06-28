@@ -33,12 +33,19 @@ namespace ProjekatAzil.Models
         public Sex Sex { get; set; }
         public decimal Weight { get; set; }
         public AdoptionStatus Adoption { get; set; }
+        
 
+        
         public virtual ICollection<Breed> Breeds { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }
 
-
+        public string MainImage {
+            get
+            {
+                return Images.Count() == 0 ? "no_image.png" : Images.FirstOrDefault().NameOfPicture;
+            }
+        }
     }
 }

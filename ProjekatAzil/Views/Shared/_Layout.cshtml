@@ -41,6 +41,7 @@
                                     <li><a href="@Url.Action("About", "Home")">About</a></li>
                                     <li><a href="@Url.Action("Index", "Dogs")">Dogs</a></li>
                                     <li><a href="@Url.Action("Index", "Breeds")">Breeds</a></li>
+                                    <li><a href="@Url.Action("Index", "Dogs", new { wishlist = true})">Wishlist</a></li>
                                     <li class="">
                                         <a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-
                                            expanded="false">Contact<span class="caret"></span></a>
@@ -51,18 +52,11 @@
                                             <li><a class="hvr-bounce-to-bottom">@Html.ActionLink("Other", "Contact", "Forms")</a></li>
                                         </ul>
                                     </li>
+                                    @Html.Partial("_LoginPartial")
                                 </ul>
                                 <div class="clearfix"> </div>
                             </div>
                         </nav>
-                    </div>
-                    <div class="agileinfo-social-grids">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                            <li><a href="#"><i class="fa fa-vk"></i></a></li>
-                        </ul>
                     </div>
                     <div class="clearfix"> </div>
                 </div>

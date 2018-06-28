@@ -14,7 +14,8 @@ namespace ProjekatAzil.Models
         public string SortDirection { get; set; } = "ASC";
         public List<Dog> Dogs { get; set; }
         public List<Event> Events { get; set; }
-        public bool Wishlist { get; set; }
+        public bool? Wishlist { get; set; }
+        public bool? ListMode { get; set; }
 
         public int Count { get; set; }
         public int PageSize { get; set; } = 10;
@@ -32,7 +33,8 @@ namespace ProjekatAzil.Models
                 SortDirection = Direction,
                 PageSize,
                 Page,
-                Wishlist
+                Wishlist,
+                ListMode
             };
         }
         public object Pagination(int Page)
@@ -46,7 +48,8 @@ namespace ProjekatAzil.Models
                 SortDirection,
                 PageSize,
                 Page,
-                Wishlist
+                Wishlist,
+                ListMode
             };
         }
     }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjekatAzil.Models;
+using System.Linq.Dynamic;
 
 namespace ProjekatAzil.Controllers
 {
@@ -15,9 +16,23 @@ namespace ProjekatAzil.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Breeds
-        public ActionResult Index()
+        public ActionResult Index(BreedViewModel breedViewModel)
         {
-            return View(db.Breeds.ToList());
+            IQueryable<Breed> QueryBreed = db.Breeds;
+
+            if(breedViewModel.BreedName != null)
+            {
+                QueryBreed = QueryBreed.Where(q => q.Name.Contains(breedViewModel.BreedName));
+            }
+            if (breedViewModel.SortBy != null && breedViewModel.SortDirection != null)
+            {
+                QueryBreed = QueryBreed.OrderBy(string.Format("{0} {1}", breedViewModel.SortBy, breedViewModel.SortDirection));
+            }
+
+            breedViewModel.Count = QueryBreed.Count();
+            QueryBreed = QueryBreed.Skip((breedViewModel.Page - 1) * breedViewModel.PageSize).Take(breedViewModel.PageSize);
+            breedViewModel.Breeds = QueryBreed.ToList();
+            return View(breedViewModel);
         }
 
         // GET: Breeds/Details/5

@@ -31,7 +31,7 @@ namespace ProjekatAzil.Models
         public int Age { get { return DateTime.Now.Year - YearOfBirth; } }
         public string Description { get; set; }
         public Sex Sex { get; set; }
-        public decimal Weight { get; set; }
+        public decimal? Weight { get; set; }
         public AdoptionStatus Adoption { get; set; }
         
 

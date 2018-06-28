@@ -28,6 +28,9 @@
     </p>
 }
 
+@Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list" })
+@Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th" })
+
 @if (Model.Dogs.Count() == 0)
 {
 
@@ -36,48 +39,16 @@
 }
 else
 {
-
-    <div class="gallery">
-        <div class="container">
-            <div class="gallery-grids">
-                @foreach (var item in Model.Dogs)
-                {
-                    <div class="col-md-4 gallery-grid">
-                        <div class="grid">
-                            <figure class="effect-apollo">
-                                <a class="example-image-link" href="images/g1.jpg" data-lightbox="example-set" data-title="Lorem ipsum dolor sit amet, consectetur adipiscing
-
-elit. Duis ut sem ac lectus mattis sagittis. Donec pulvinar quam sit amet est vestibulum volutpat. Phasellus sed nibh odio. Phasellus posuere at purus sit amet porttitor. Cras
-
-euismod egestas enim eget molestie. Aenean ornare condimentum odio, in lacinia felis finibus non. Nam faucibus libero et lectus finibus, sed porttitor velit pellentesque.">
-                                    <img src="~/Content/Images/@item.MainImage" alt="" />
-                                    <figcaption>
-                                        <p>
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                            @Html.Raw(",")
-                                            @Html.DisplayFor(modelItem => item.Age)
-                                        </p>
-                                    </figcaption>
-                                </a>
-                            </figure>
-                        </div>
-                    </div>
-                }
-                <div class="clearfix"> </div>
-                <script src="js/lightbox-plus-jquery.min.js"></script>
-            </div>
-        </div>
-    </div>
-
-    for (int i = 1; i <= Model.TotalPages; i++)
+    if (Model.ListMode == true)
     {
-        @Html.ActionLink(i.ToString(), "Index", Model.Pagination(i));
-        @Html.Raw("|")
+        @Html.Partial("_IndexListMode")
+    }
+    else
+    {
+        @Html.Partial("_IndexGridMode")
     }
 }
 <!-- //gallery -->
-
-<h2>Our dogs</h2>
 
 @if (Model.Wishlist == false)
 {
@@ -87,108 +58,5 @@ euismod egestas enim eget molestie. Aenean ornare condimentum odio, in lacinia f
 }
 
 
-@using (Html.BeginForm())
-{
-    <p>
-        Dogs Name: @Html.TextBox("DogName")
-        Dogs Breed: @Html.TextBox("DogBreed")
-        <input type="submit" value="Search" />
-    </p>
-}
 
-@if (Model.Dogs.Count() == 0)
-{
-
-    @Html.Raw("Sorry, no dogs to show.")
-
-}
-else
-{
-    <table class="table">
-        <tr>
-            <th>
-                Images
-            </th>
-            <th>
-                @Html.ActionLink("Name", "Index", Model.Sorting("Name"))
-            </th>
-            <th>
-                Breed
-            </th>
-            <th>
-                Age
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Sex
-            </th>
-            <th>
-                Weight
-            </th>
-            <th>
-                Adoptiom
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.Dogs)
-        {
-            <tr>
-                <td>
-                    <img src="~/Content/Images/@item.MainImage" height="100px" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @string.Join(",", item.Breeds.Select(d => d.Name))
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sex)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Weight)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Adoption)
-                </td>
-                <td>
-
-                    @if (Model.Wishlist == false)
-                    {
-                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", title = "Edit" })
-                        @Html.Raw("| ")
-                        @Html.ActionLink(" ", "AddToWishlist", new { id = item.Id }, new { @class = "glyphicon glyphicon-heart", title = "Add to wishlist" })
-                        @Html.Raw("| ")
-                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Remove" })
-                        @Html.Raw("|")
-                    }
-                    else
-                    {
-                        @Html.ActionLink(" ", "RemoveFromWishlist", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Remove" })
-                        @Html.Raw("|")
-                    }
-                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "glyphicon glyphicon-list-alt", title = "Details" })
-
-
-                </td>
-            </tr>
-        }
-
-
-    </table>
-    for (int i = 1; i <= Model.TotalPages; i++)
-    {
-        @Html.ActionLink(i.ToString(), "Index", Model.Pagination(i));
-        @Html.Raw("|")
-    }
-}
 

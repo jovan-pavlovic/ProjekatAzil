@@ -18,7 +18,7 @@ namespace ProjekatAzil.Models
         public bool? ListMode { get; set; }
 
         public int Count { get; set; }
-        public int PageSize { get; set; } = 10;
+        public int PageSize { get; set; } = 12;
         public int Page { get; set; } = 1;
         public int TotalPages { get { return (Count + PageSize - 1) / PageSize; } }
         public object Sorting(string Sort)

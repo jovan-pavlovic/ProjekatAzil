@@ -24,8 +24,13 @@ euismod egestas enim eget molestie. Aenean ornare condimentum odio, in lacinia f
                                 </figcaption>
                             </a>
                         </figure>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @Html.Raw("|")
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
                     </div>
                 </div>
+               
             }
             <div class="clearfix"> </div>
             <script src="js/lightbox-plus-jquery.min.js"></script>

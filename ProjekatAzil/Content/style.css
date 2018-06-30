@@ -19,10 +19,11 @@ body{
 	background:#FFFFFF;
 }
 /*-- banner --*/
+
 .banner{
 	background: url(../images/1.jpeg) no-repeat 0px 0px;
     background-size: cover;
-    padding: 0em 0 4em;
+    padding: 0em 0 1em;
 }
 /*-- header-left --*/
 .header {
@@ -54,8 +55,9 @@ body{
 }
 /*-- top-nav --*/
 .top-nav{
-    margin: .5em 0 0 0;
+    margin: 0.5em 0 0 0;
     float: left;
+
 }
 .top-nav ul{
     padding: 0;
@@ -63,12 +65,14 @@ body{
 }
 .top-nav ul li{
     display: inline-block;
-    margin: 0 1em;
-    float: left;
+    margin: 0 7px;
+    /*float: left;*/
+    
 }
-.top-nav ul li:nth-child(6){
-	margin-right:0;
-}
+    .top-nav ul li:nth-child(6) {
+        margin-right: 0;
+     
+    }
 ul.nav.navbar-nav {
     float: right;
 }
@@ -84,15 +88,20 @@ ul.nav.navbar-nav {
     background: none !important;
     box-shadow: 1px 0px 0px 0px rgba(72, 72, 72, 0);
 }
-.top-nav ul li a{
+.top-nav ul li a {
     color: #2f2f2f !important;
     font-size: 1em;
     margin: 0;
     text-decoration: none;
-    padding: 0;
+    padding: 0px;
     font-weight: 600;
     font-family: 'Roboto Condensed', sans-serif;
     letter-spacing: 1px;
+    border-style:solid;
+    border-color:darkseagreen;
+    border-top: 0.2px;
+    border-bottom: 0.2px;
+    padding: 4px;
 }
 .top-nav ul li a:hover{
     color: #F44336 !important;

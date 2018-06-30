@@ -6589,3 +6589,7 @@ button.close {
     height: 100px;
     margin: 10px;
 }
+.vl {
+    border-left: 6px solid green;
+    height: 500px;
+}

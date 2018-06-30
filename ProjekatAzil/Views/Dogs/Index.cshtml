@@ -31,10 +31,10 @@
                 <input type="submit" value="Search" />
             </p>
         }
-
+        
         @Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list"  })
         @Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th" })
-
+        
         @if (Model.Dogs.Count() == 0)
         {
 
@@ -60,7 +60,7 @@
                 @Html.ActionLink("Create New", "Create")
             </p>
         }
-
+        <br/>
     </div>
 
 

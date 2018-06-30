@@ -6589,3 +6589,11 @@ button.close {
     height: 100px;
     margin: 10px;
 }
+.threecolumns {
+    -webkit-columns : 50px 3;
+    -moz-columns : 50px 3;
+    columns : 50px 3;
+}
+#space {
+    margin : 6px;
+}

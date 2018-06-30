@@ -17,9 +17,13 @@
        
         @if (Model.Wishlist == false)
         {
-            <p>
-                @Html.ActionLink("Create New", "Create")
-            </p>
+            if (User.IsInRole(RolesCfg.ADMIN))
+            {
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+            }
+            
         }
         <br/>
       
@@ -32,8 +36,8 @@
             </p>
         }
 
-        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list"  })
-        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th" })
+        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list" ,title ="List" })
+        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th",title = "Grid" })
 
         @if (Model.Dogs.Count() == 0)
         {
@@ -42,9 +46,10 @@
 
         }
         else
-        {
+        {//wishlist da ne prikazuje ovo
             if (Model.ListMode == true)
             {
+
                 @Html.Partial("_IndexListMode")
             }
             else
@@ -54,12 +59,7 @@
         }
         <!-- //gallery -->
 
-        @if (Model.Wishlist == false)
-        {
-            <p>
-                @Html.ActionLink("Create New", "Create")
-            </p>
-        }
+        
 
     </div>
 

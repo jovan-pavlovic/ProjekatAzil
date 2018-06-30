@@ -22,7 +22,7 @@ body{
 .banner{
 	background: url(../images/1.jpeg) no-repeat 0px 0px;
     background-size: cover;
-    padding: 0em 0 4em;
+    padding: 0em 0 1em;
 }
 /*-- header-left --*/
 .header {
@@ -2383,4 +2383,5 @@ ul.pagination {
 		font-size: 1.5em;
 	}
 }
+
 /*-- //responsive --*/

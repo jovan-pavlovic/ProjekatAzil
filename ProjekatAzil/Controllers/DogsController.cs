@@ -245,7 +245,7 @@ namespace ProjekatAzil.Controllers
         }
 
 
-        public ActionResult AddToWishlist(int? id)
+        public ActionResult AddToWishlist(int? id, bool? listMode)
         {
             if (id == null)
             {
@@ -261,7 +261,7 @@ namespace ProjekatAzil.Controllers
             dog.Users.Add(db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name));
             db.SaveChanges();
 
-            return RedirectToAction("Index", new { wishlist = false });
+            return RedirectToAction("Index", new { wishlist = false, listMode });
         }
 
         public ActionResult RemoveFromWishlist(int? id)

@@ -47,17 +47,24 @@ namespace ProjekatAzil.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description")] Event @event,string DogId)
+        public ActionResult Create([Bind(Include = "Id,Title,Description")] Event @event, string DogId)
         {
+            //int dog = 0;
             if (ModelState.IsValid)
             {
 
                 if (DogId != null)
                 {
+
+
+                    //var dogList = DogId.Split(',')
+                    //    .Where(d => int.TryParse(d, out dog))
+                    //    .Select(d => int.Parse(d))
+                    //    .ToList();
                     var dogList = DogId.Split(',').Select(int.Parse).ToList();
                     @event.Dogs = db.Dogs.Where(x => dogList.Contains(x.Id)).ToList();
-                    
-                   
+
+
                 }
                 db.Events.Add(@event);
                 db.SaveChanges();
@@ -66,6 +73,9 @@ namespace ProjekatAzil.Controllers
 
             return View(@event);
         }
+
+
+
 
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)

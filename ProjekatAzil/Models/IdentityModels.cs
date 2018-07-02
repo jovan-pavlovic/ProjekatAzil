@@ -13,6 +13,7 @@ namespace ProjekatAzil.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PlaceOfResidence { get; set; }
+        public bool ConfirmedEmail { get; set; }
         public virtual ICollection<Dog> Dogs { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

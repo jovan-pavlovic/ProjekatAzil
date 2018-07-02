@@ -1,11 +1,15 @@
 ﻿@using ProjekatAzil.Models
 @model ProjekatAzil.Models.Dog
 
-@{
-    ViewBag.Title = "Details";
+@section HeaderBottom{
+    <div class="about-heading">
+        <div class="container">
+            <h2>Details</h2>
+        </div>
+    </div>
 }
 
-<h2>Details</h2>
+<h2>@Model.Name</h2>
 
 <div>
     <h4>Dog</h4>
@@ -59,9 +63,9 @@
             @Html.DisplayFor(model => model.Adoption)
         </dd>
         <dd>
-            @foreach(var news in Model.Events)
+            @foreach (var news in Model.Events)
             {
-                @Html.ActionLink(news.Title,"Details"+"/"+news.Id,"Events")
+                @Html.ActionLink(news.Title, "Details" + "/" + news.Id, "Events")
             }
         </dd>
 
@@ -72,20 +76,20 @@
 {
     foreach (var item in Model.Images)
     {
-        <a href="~/Content/Images/@item.NameOfPicture" data-lightbox="roadtrip"><img src="~/Content/Images/@item.NameOfPicture" class="thumbnail"/></a>
+        <a href="~/Content/Dog Images/@item.NameOfPicture" data-lightbox="roadtrip"><img src="~/Content/Dog Images/@item.NameOfPicture" class="thumbnail" align="middle" /></a>
     }
 }
 
 
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @if (Request.UrlReferrer.AbsolutePath.Equals(Url.RouteUrl("Wishlist")))
-            {
-                @Html.ActionLink("Back to List", "Index", new { wishlist = true })
-            }
-            else
-            {
-                @Html.ActionLink("Back to List", "Index")
-            }
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @if (Request.UrlReferrer.AbsolutePath.Equals(Url.RouteUrl("Wishlist")))
+    {
+        @Html.ActionLink("Back to List", "Index", new { wishlist = true })
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index")
+    }
 
-        </p>
+</p>

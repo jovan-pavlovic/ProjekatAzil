@@ -4,7 +4,7 @@
 @section HeaderBottom{
     <div class="about-heading">
         <div class="container">
-            <h2>Event</h2>
+            <h2>News & Events</h2>
         </div>
     </div>
 }
@@ -24,6 +24,14 @@
                     <div class="single-left-left">
                         <img src="~/Content/Event Images/@Model.NameOfImage" alt="" />
                         <p>@Model.UploadTimeStamp.ToString("dd/MM/yyyy  HH:MM")</p>
+                        <br />
+                        <p>
+                            @foreach (var dog in Model.Dogs)
+                            {
+                                @Html.ActionLink(dog.Name, "Details/" + dog.Id, "Dogs")
+                                <br />
+                            }
+                       </p>
                     </div>
                     <div class="blog-left-bottom">
                         <p>@Model.Description</p>

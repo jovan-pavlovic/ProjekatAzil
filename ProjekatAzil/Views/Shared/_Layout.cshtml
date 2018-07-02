@@ -80,7 +80,7 @@
             <div class="agileits-w3layouts-footer-grids">
                 <div class="col-md-4 footer-left">
                     <h3>
-                        <a href="index.html">Cat <span>Club</span></a>
+                        <a href="index.html">Dog <span>Club</span></a>
                     </h3>
                     <div class="footer-social-grids">
                         <ul>
@@ -93,28 +93,23 @@
                     <h4>Navigation</h4>
                     <div class="col-md-6 footer-grid-left">
                         <ul>
-                            <li><a class="active" href="index.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="icons.html">Icons</a></li>
+                            <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li><a href="@Url.Action("About", "Home")">About</a></li>
+                            <li><a href="@Url.Action("Index", "Dogs")">Dogs</a></li>
+                            <li><a href="@Url.Action("Index", "Breeds")">Breeds</a></li>
+                            <li><a href="@Url.Action("Index", "Dogs", new { wishlist = true})">Wishlist</a></li>
+                            <li><a href="@Url.Action("Index", "Events")">Events</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 footer-grid-left">
                         <ul>
-                            <li><a href="typography.html">Typography</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a class="hvr-bounce-to-bottom">@Html.ActionLink("Adoption", "AdoptionDogForm", "Forms")</a></li>
+                            <li><a class="hvr-bounce-to-bottom">@Html.ActionLink("Voulunteer", "VolunteerForm", "Forms")</a></li>
+                            <li><a class="hvr-bounce-to-bottom">@Html.ActionLink("Donation", "Donation", "Forms")</a></li>
+                            <li><a class="hvr-bounce-to-bottom">@Html.ActionLink("Other", "Contact", "Forms")</a></li>
                         </ul>
                     </div>
                     <div class="clearfix"> </div>
-                </div>
-                <div class="col-md-4 footer-left">
-                    <h4>Newsletter</h4>
-                    <p>Subscribe With Us</p>
-                    <form action="#" method="post">
-                        <input type="email" placeholder="Subscribe" name="Subscribe" required="">
-                        <button class="btn1">Go</button>
-                    </form>
                 </div>
                 <div class="clearfix"> </div>
             </div>

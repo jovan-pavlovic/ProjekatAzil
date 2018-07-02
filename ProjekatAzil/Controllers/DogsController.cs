@@ -219,7 +219,7 @@ namespace ProjekatAzil.Controllers
                         };
                         db.Images.Add(image);
 
-                        var imagePath = Server.MapPath($"~/Content/Images/{image.NameOfPicture}");
+                        var imagePath = Server.MapPath($"~/Content/Dog Images/{image.NameOfPicture}");
                         item.SaveAs(imagePath);
                     }
                 }
@@ -235,7 +235,7 @@ namespace ProjekatAzil.Controllers
             {
                 db.Images.Remove(image);
                 db.SaveChanges();
-                var imagePath = Server.MapPath($"~/Content/Images/{image.NameOfPicture}");
+                var imagePath = Server.MapPath($"~/Content/Dog Images/{image.NameOfPicture}");
                 if (System.IO.File.Exists(imagePath))
                 {
                     System.IO.File.Delete(imagePath);

@@ -1,164 +1,168 @@
 ﻿@model ProjekatAzil.Models.Dog
 
-@{
-    ViewBag.Title = "Edit";
+@section HeaderBottom{
+    <div class="about-heading">
+        <div class="container">
+            <h2>Edit</h2>
+        </div>
+    </div>
 }
 
-<h2>Edit</h2>
+<h2>@Model.Name</h2>
 
 
 @using (Html.BeginForm("Edit", "Dogs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Dog</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+        <h4>Dog</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.YearOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.YearOfBirth, new { htmlAttributes = new { @class = "form-control minmax" } })
-            @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.YearOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YearOfBirth, new { htmlAttributes = new { @class = "form-control minmax" } })
+                @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.Sex, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Sex, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Adoption, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.Adoption, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Adoption, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Adoption, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Adoption, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Adoption, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="files" class = "control-label col-md-2">Add images: </label>
-        <input name="images" id="files" type="file" multiple class = "control-label col-md-5" />
-        <br />
-        <output id="result" />
-    </div>
-    <div class="form-group">
-        @if (Model.Images != null)
-        {
-            foreach (var image in Model.Images)
+        <div class="form-group">
+            <label for="files" class="control-label col-md-2">Add images: </label>
+            <input name="images" id="files" type="file" multiple class="control-label col-md-5" />
+            <br />
+            <output id="result" />
+        </div>
+        <div class="form-group">
+            @if (Model.Images != null)
             {
-                @Html.ActionLink("Delete", "DeleteImage", new { imageId = image.Id })
-                <img src="~/Content/Images/@image.NameOfPicture" alt="@image.NameOfPicture" height="100" />
+                foreach (var image in Model.Images)
+                {
+                    @Html.ActionLink("Delete", "DeleteImage", new { imageId = image.Id })
+                    <img src="~/Content/Dog Images/@image.NameOfPicture" alt="@image.NameOfPicture" height="100" />
+                }
+            }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <br />
+            <div class="threecolumns">
+                @foreach (var breed in ViewBag.Breed)
+                {
+                    <input type="checkbox" name="DogBreedIds" value="@breed.Id" @if (Model.Breeds.Any(b => b.Id == breed.Id)) { @Html.Raw("checked='checked'") }>@breed.Name<br>
+                }
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $(".minmax").attr({
+                "max": (new Date()).getFullYear(),
+                "min": 2000
+            });
+        })
+    </script>
+
+    <script>
+        window.onload = function () {
+
+            //Check File API support
+            if (window.File && window.FileList && window.FileReader) {
+                var filesInput = document.getElementById("files");
+
+                filesInput.addEventListener("change", function (event) {
+
+                    var files = event.target.files; //FileList object
+                    var output = document.getElementById("result");
+
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+
+                        //Only pics
+                        if (!file.type.match('image'))
+                            continue;
+
+                        var picReader = new FileReader();
+
+                        picReader.addEventListener("load", function (event) {
+
+                            var picFile = event.target;
+
+                            var div = document.createElement("div");
+
+                            div.innerHTML = "<img class='thumbnail' align='middle' src='" + picFile.result + "' " +
+                                " title='" + picFile.name + "'/></div>";
+
+                            output.insertBefore(div, null);
+
+                        });
+
+                        //Read the image
+                        picReader.readAsDataURL(file);
+                    }
+
+                });
+            }
+            else {
+                console.log("Your browser does not support File API");
             }
         }
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
-        <br />
-        <div class="threecolumns">
-            @foreach (var breed in ViewBag.Breed)
-            {
-                <input type="checkbox" name="DogBreedIds" value="@breed.Id" @if (Model.Breeds.Any(b => b.Id == breed.Id)) { @Html.Raw("checked='checked'") }>@breed.Name<br>
-            }
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script>
-            $(document).ready(function () {
-                $(".minmax").attr({
-                    "max": (new Date()).getFullYear(),
-                    "min": 2000
-                });
-            })
-        </script>
-
-        <script>
-            window.onload = function () {
-
-                //Check File API support
-                if (window.File && window.FileList && window.FileReader) {
-                    var filesInput = document.getElementById("files");
-
-                    filesInput.addEventListener("change", function (event) {
-
-                        var files = event.target.files; //FileList object
-                        var output = document.getElementById("result");
-
-                        for (var i = 0; i < files.length; i++) {
-                            var file = files[i];
-
-                            //Only pics
-                            if (!file.type.match('image'))
-                                continue;
-
-                            var picReader = new FileReader();
-
-                            picReader.addEventListener("load", function (event) {
-
-                                var picFile = event.target;
-
-                                var div = document.createElement("div");
-
-                                div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "' " +
-                                    " title='" + picFile.name + "' />Description: <input type='text'></input>";
-
-                                output.insertBefore(div, null);
-
-                            });
-
-                            //Read the image
-                            picReader.readAsDataURL(file);
-                        }
-
-                    });
-                }
-                else {
-                    console.log("Your browser does not support File API");
-                }
-            }
-        </script>
-    }
+    </script>
+}

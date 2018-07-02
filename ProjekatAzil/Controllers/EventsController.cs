@@ -130,7 +130,7 @@ namespace ProjekatAzil.Controllers
                     var dogList = DogId.Split(',').Select(int.Parse).ToList();
                     eventInDB.Dogs = db.Dogs.Where(x => dogList.Contains(x.Id)).ToList();
                 }
-                if( image.FileName != null && image.FileName != @event.NameOfImage)
+                if( image != null && image.FileName != @event.NameOfImage)
                 {
                     if (@event.Image != null)
                     {

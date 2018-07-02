@@ -2247,7 +2247,8 @@ pre code {
   }
 }
 table {
-  background-color: transparent;
+   background-color: rgb(212, 255, 170, 60%);
+   opacity:60;
 }
 caption {
   padding-top: 8px;
@@ -2262,6 +2263,7 @@ th {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
+  box-shadow:1px 1px 20px #777;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,

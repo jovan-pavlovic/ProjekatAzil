@@ -26,7 +26,7 @@
             
         }
         <br/>
-      
+       
         @using (Html.BeginForm())
         {
             <p>
@@ -38,7 +38,8 @@
 
         @Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list" ,title ="List" })
         @Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th",title = "Grid" })
-
+       <br/>
+        <br/>
         @if (Model.Dogs.Count() == 0)
         {
 
@@ -59,7 +60,8 @@
         }
         <!-- //gallery -->
 
-        
+        <br/>
+        <br/>
 
     </div>
 

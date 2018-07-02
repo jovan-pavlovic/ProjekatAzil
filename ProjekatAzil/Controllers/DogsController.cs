@@ -175,6 +175,10 @@ namespace ProjekatAzil.Controllers
             {
                 return HttpNotFound();
             }
+            foreach(var image in dog.Images)
+            {
+                DeleteImage(image.Id);
+            }
             return View(dog);
         }
 

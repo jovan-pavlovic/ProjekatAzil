@@ -16,7 +16,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Dog</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -75,34 +74,35 @@
             <br />
             <output id="result" />
         </div>
-        <div class="form-group">
+        <div class="form-group control-label col-md-7">
             @if (Model.Images != null)
             {
                 foreach (var image in Model.Images)
                 {
-                    @Html.ActionLink("Delete", "DeleteImage", new { imageId = image.Id })
+                    @Html.ActionLink("Delete", "DeleteImage", new { @class = "btn btn-default" }, new { @class = "btn btn-default", imageId = image.Id })
                     <img src="~/Content/Dog Images/@image.NameOfPicture" alt="@image.NameOfPicture" height="100" />
                 }
             }
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
-            <br />
-            <div class="threecolumns">
-                @foreach (var breed in ViewBag.Breed)
-                {
-                    <input type="checkbox" name="DogBreedIds" value="@breed.Id" @if (Model.Breeds.Any(b => b.Id == breed.Id)) { @Html.Raw("checked='checked'") }>@breed.Name<br>
-                }
+        <div class="clearfix"></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Breeds, htmlAttributes: new { @class = "control-label col-md-2" })
+                <br />
+                <div class="threecolumns">
+                    @foreach (var breed in ViewBag.Breed)
+                    {
+                        <input type="checkbox" name="DogBreedIds" value="@breed.Id" @if (Model.Breeds.Any(b => b.Id == breed.Id)) { @Html.Raw("checked='checked'") }>@breed.Name<br>
+                    }
+                </div>
             </div>
-        </div>
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
             </div>
         </div>
-    </div>
 }
 
 <div>
@@ -146,8 +146,8 @@
                             var picFile = event.target;
 
                             var div = document.createElement("div");
-
-                            div.innerHTML = "<img class='thumbnail' align='middle' src='" + picFile.result + "' " +
+                            
+                            div.innerHTML = "<div class='control-label col-md-4'><img class='thumbnail' src='" + picFile.result + "' " +
                                 " title='" + picFile.name + "'/></div>";
 
                             output.insertBefore(div, null);

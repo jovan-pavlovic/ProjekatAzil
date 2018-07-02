@@ -10,7 +10,8 @@
                 <div class="col-md-4 gallery-grid">
                     <div class="grid">
                         <figure class="effect-apollo">
-                            <a class="example-image-link" href='@Url.Action("Details", new { controller = "Dogs", id = item.Id })'><img src="~/Content/Dog Images/@item.MainImage" alt="" height="350" />
+                            <a class="example-image-link" href='@Url.Action("Details", new { controller = "Dogs", id = item.Id })'>
+                                <img src="~/Content/Dog Images/@item.MainImage" alt="" height="350" />
                                 <figcaption>
                                     <p>
                                         @Html.DisplayFor(modelItem => item.Name)
@@ -20,8 +21,8 @@
                                 </figcaption>
                             </a>
                         </figure>
-                        
-                        
+
+
                         @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", title = "Edit" })
                         @Html.Raw("|")
                         @if (User.IsInRole(RolesCfg.ADMIN))
@@ -30,17 +31,19 @@
                             {
                                 @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Delete" })
                                 @Html.Raw("|")
+                                @Html.ActionLink(" ", "AddToWishlist", new { id = item.Id }, new { @class = "glyphicon glyphicon-heart", title = "Add to wishlist" })
+                                @Html.Raw("|")
                             }
                             else
                             {
                                 @Html.ActionLink(" ", "RemoveFromWishlist", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Delete from wishlist" })
                                 @Html.Raw("|")
                             }
+                        }
 
-                            }
-                        @Html.ActionLink(" ", "AddToWishlist", new { id = item.Id }, new { @class = "glyphicon glyphicon-heart", title = "Add to wishlist" })
-                        
-                        
+                        @Html.ActionLink("Adopt", "AdoptionDogForm", "Forms", new { title = "Adopt" })
+
+
 
                     </div>
                 </div>
@@ -51,10 +54,23 @@
         </div>
     </div>
 </div>
-<div class="text-center">
-    @for (int i = 1; i <= Model.TotalPages; i++)
-    {
-        @Html.ActionLink(i.ToString(), "Index", Model.Pagination(i), new { listMode = false });
-        @Html.Raw("|")
-    }
-</div>
+
+        <div class="container">
+            <div class="blog">
+                <div class="container">
+                    <div class="blog-top-grids">
+                        <div class="col-md-8 blog-top-left-grid">
+                            <nav>
+                                <ul class="pagination">
+                                    @for (int i = 1; i <= Model.TotalPages; i++)
+                                    {
+                                        <li>@Html.ActionLink(i.ToString(), "Index", new { listMode = false }, Model.Pagination(i))</li>
+                                    }
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

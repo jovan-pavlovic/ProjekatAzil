@@ -27,10 +27,10 @@
                             {
                                 <div class="blog-left">
                                     <div class="blog-left-left">
-                                        @item.UploadTimeStamp.Date.ToString("d")
                                         <a href="@Url.Action("Details", new { id = item.Id})">
                                             <img src="~/Content/Event Images/@item.NameOfImage" alt="" />
                                         </a>
+                                        <p>@item.UploadTimeStamp.Date.ToString("d")</p>
                                     </div>
                                     <div class="blog-left-right">
                                         <div class="col-lg-6">
@@ -45,7 +45,14 @@
                                             </div>
                                         }
                                         <p>
-                                            @item.Description
+                                            @if (item.Description.Length > 500)
+                                            {
+                                                @item.Description.Substring(0, 500)
+                                            }
+                                            else
+                                            {
+                                                @item.Description
+                                            }
                                         </p>
                                     </div>
                                     <div class="clearfix"> </div>

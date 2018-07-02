@@ -11,9 +11,8 @@
 
 <h2>@Model.Name</h2>
 
-<div>
-    <h4>Dog</h4>
-    <hr />
+<div class="col-md-offset-5">
+    <div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -62,34 +61,42 @@
         <dd>
             @Html.DisplayFor(model => model.Adoption)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Events)
+        </dt>
         <dd>
             @foreach (var news in Model.Events)
             {
-                @Html.ActionLink(news.Title, "Details" + "/" + news.Id, "Events")
+            <p> @Html.ActionLink(news.Title, "Details" + "/" + news.Id, "Events")</p>
+               
             }
         </dd>
 
     </dl>
+
+    <div class="col-md-offset-">
+        @if (Model.Images != null)
+        {
+            foreach (var item in Model.Images)
+            {
+                <a href="~/Content/Dog Images/@item.NameOfPicture" data-lightbox="roadtrip"><img src="~/Content/Dog Images/@item.NameOfPicture" class="thumbnail" align="middle" /></a>
+            }
+        }
+
+
+        <p>
+
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" }) |
+            @if (Request.UrlReferrer.AbsolutePath.Equals(Url.RouteUrl("Wishlist")))
+            {
+                @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-default" }, new { @class = "btn btn-default", wishlist = true })
+            }
+            else
+            {
+                @Html.ActionLink("Back to List", "Index")
+            }
+
+        </p>
+    </div>
 </div>
-
-@if (Model.Images != null)
-{
-    foreach (var item in Model.Images)
-    {
-        <a href="~/Content/Dog Images/@item.NameOfPicture" data-lightbox="roadtrip"><img src="~/Content/Dog Images/@item.NameOfPicture" class="thumbnail" align="middle" /></a>
-    }
-}
-
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @if (Request.UrlReferrer.AbsolutePath.Equals(Url.RouteUrl("Wishlist")))
-    {
-        @Html.ActionLink("Back to List", "Index", new { wishlist = true })
-    }
-    else
-    {
-        @Html.ActionLink("Back to List", "Index")
-    }
-
-</p>
+</div>

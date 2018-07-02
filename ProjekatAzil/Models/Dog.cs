@@ -30,9 +30,17 @@ namespace ProjekatAzil.Models
         public int YearOfBirth { get; set; }
         public int Age { get { return DateTime.Now.Year - YearOfBirth; } }
         public string Description { get; set; }
+        public string ShortDescription
+        {
+            get
+            {
+                return Description.Length > 100 ? Description.ToString().Substring(0, 100) : Description;
+            }
+        }
         public Sex Sex { get; set; }
         public decimal? Weight { get; set; }
         public AdoptionStatus Adoption { get; set; }
+
         
 
         

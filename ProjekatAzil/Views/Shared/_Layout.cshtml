@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using ProjekatAzil.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Dog Club</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/lightbox.css" rel="stylesheet">
@@ -43,7 +44,10 @@
                                     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
                                     <li><a href="@Url.Action("About", "Home")">About</a></li>
                                     <li><a href="@Url.Action("Index", "Dogs")">Dogs</a></li>
-                                    <li><a href="@Url.Action("Index", "Breeds")">Breeds</a></li>
+                                    @if (User.IsInRole(RolesCfg.ADMIN))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Breeds")">Breeds</a></li>
+                                    }
                                     <li><a href="@Url.Action("Index", "Dogs", new { wishlist = true})">Wishlist</a></li>
                                     <li><a href="@Url.Action("Index", "Events")">Events</a></li>
                                     <li class="">
@@ -81,25 +85,28 @@
     <footer>
         <div class="container">
             <div class="agileits-w3layouts-footer-grids">
-                <div class="col-md-4 footer-left">
+                <div class="col-md-6 footer-left">
                     <h3>
                         <a href="index.html">Dog <span>Club</span></a>
                     </h3>
-                    <div class="footer-social-grids">
+                    <div class="footer-social-grids" align="center">
                         <ul>
                             <li><a href="https://www.facebook.com/groups/214484685857816/"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="https://twitter.com/DogsShelter1"><i class="fa fa-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4 footer-left">
+                <div class="col-md-4 footer-left" align="center">
                     <h4>Navigation</h4>
                     <div class="col-md-6 footer-grid-left">
                         <ul>
                             <li><a href="@Url.Action("Index", "Home")">Home</a></li>
                             <li><a href="@Url.Action("About", "Home")">About</a></li>
                             <li><a href="@Url.Action("Index", "Dogs")">Dogs</a></li>
-                            <li><a href="@Url.Action("Index", "Breeds")">Breeds</a></li>
+                            @if (User.IsInRole(RolesCfg.ADMIN))
+                            {
+                                <li><a href="@Url.Action("Index", "Breeds")">Breeds</a></li>
+                            }
                             <li><a href="@Url.Action("Index", "Dogs", new { wishlist = true})">Wishlist</a></li>
                             <li><a href="@Url.Action("Index", "Events")">Events</a></li>
                         </ul>

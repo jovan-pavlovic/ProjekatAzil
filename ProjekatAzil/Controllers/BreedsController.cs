@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using ProjekatAzil.Models;
 using System.Linq.Dynamic;
+
 
 namespace ProjekatAzil.Controllers
 {
@@ -16,6 +18,7 @@ namespace ProjekatAzil.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Breeds
+        [Authorize(Roles = RolesCfg.ADMIN)]
         public ActionResult Index(BreedViewModel breedViewModel)
         {
             IQueryable<Breed> QueryBreed = db.Breeds;

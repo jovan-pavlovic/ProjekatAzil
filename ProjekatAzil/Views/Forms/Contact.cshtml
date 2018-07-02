@@ -1,34 +1,34 @@
-﻿@model ProjekatAzil.Models.Contact
+﻿@model ProjekatAzil.Models.Form
 @section HeaderBottom{
-<div class="about-heading">
-    <div class="container">
-        <h2>Contact Form</h2>
+    <div class="about-heading">
+        <div class="container">
+            <h2>Contact Form</h2>
+        </div>
     </div>
-</div>
 }
 <div class="container">
 
-    @using (Html.BeginForm("Index", "Forms", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Contact", "Forms", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <br />
         <br />
-        <p>Ime:</p>
+        <p>First name:</p>
         <input type="text" name="Model.FirstName" value="">
         <br />
         <br />
-        <p>Prezime:</p>
+        <p>Last name:</p>
         <input type="text" name="Model.LastName" value="">
         <br />
         <br />
-        <p>Broj Telefona:</p>
-        <input type="number" name="Model.PhoneNumber" value="">
+        <p>Phone number:</p>
+        <input type="text" name="Model.PhoneNumber" value="">
         <br />
         <br />
         <p>E-mail:</p>
         <input type="email" name="Model.Email">
         <br />
         <br />
-        <p>Coment:</p>
+        <p>Comment:</p>
         <textarea rows="5" cols="60">
     </textarea>
         <br />
@@ -38,3 +38,8 @@
         <br />
     }
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

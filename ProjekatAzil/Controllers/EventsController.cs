@@ -15,9 +15,16 @@ namespace ProjekatAzil.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Events
-        public ActionResult Index()
+        public ActionResult Index(int page = 0)
         {
-            return View(db.Events.ToList());
+            var events = db.Events.ToList();
+            const int pageSize = 3;
+            var count = events.Count();
+            ViewBag.EventsPage = page;
+            ViewBag.EventsTotalPages = (count + pageSize - 1) / pageSize;
+            var eventsQuery = events.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            return View(eventsQuery);
+            
         }
 
         // GET: Events/Details/5
@@ -47,13 +54,13 @@ namespace ProjekatAzil.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description")] Event @event, string DogId)
+        public ActionResult Create([Bind(Include = "Id,Title,Description")] Event @event, string DogId, HttpPostedFileBase image)
         {
             //int dog = 0;
             if (ModelState.IsValid)
             {
 
-                if (DogId != null)
+                if (!DogId.Equals(""))
                 {
 
 
@@ -63,9 +70,15 @@ namespace ProjekatAzil.Controllers
                     //    .ToList();
                     var dogList = DogId.Split(',').Select(int.Parse).ToList();
                     @event.Dogs = db.Dogs.Where(x => dogList.Contains(x.Id)).ToList();
-
-
                 }
+
+                if (@event != null && image != null)
+                {
+                    AddImage(@event, image);
+                }
+
+                
+                @event.UploadTimeStamp = DateTime.Now;
                 db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -98,7 +111,7 @@ namespace ProjekatAzil.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description")] Event @event,string DogId)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description")] Event @event,string DogId, HttpPostedFileBase image)
         {
             ShowDogs();
             if (ModelState.IsValid)
@@ -117,7 +130,20 @@ namespace ProjekatAzil.Controllers
                     var dogList = DogId.Split(',').Select(int.Parse).ToList();
                     eventInDB.Dogs = db.Dogs.Where(x => dogList.Contains(x.Id)).ToList();
                 }
+                if( image.FileName != null && image.FileName != @event.NameOfImage)
+                {
+                    if (@event.Image != null)
+                    {
+                        db.Images.Remove(db.Images.FirstOrDefault(i => @event.Image.Id == i.Id));
+                    }
+                    AddImage(@event, image);
 
+                    var imagePath = "~/Content/Events Images/" + @event.NameOfImage;
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }
 
                 db.Entry(eventInDB).State = EntityState.Modified;
                 db.SaveChanges();
@@ -138,7 +164,16 @@ namespace ProjekatAzil.Controllers
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            if (@event.NameOfImage != "event_default.jpeg")
+            {
+                db.Images.Remove(db.Images.FirstOrDefault(i => @event.Image.Id == i.Id));
+                var imagePath = "~/Content/Events Images/" + @event.Image.NameOfPicture;
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
+                return View(@event);
         }
 
         // POST: Events/Delete/5
@@ -165,6 +200,20 @@ namespace ProjekatAzil.Controllers
         private void ShowDogs()
         {
             ViewBag.Dogs = db.Dogs.ToList();
+        }
+
+        private void AddImage(Event @event, HttpPostedFileBase image)
+            {
+            var eventImage = new Image
+            {
+                NameOfPicture = image.FileName,
+            };
+            db.Images.Add(eventImage);
+            db.SaveChanges();
+            @event.Image = eventImage;
+
+            var imagePath = Server.MapPath($"~/Content/Event Images/{eventImage.NameOfPicture}");
+            image.SaveAs(imagePath);
         }
     }
 }

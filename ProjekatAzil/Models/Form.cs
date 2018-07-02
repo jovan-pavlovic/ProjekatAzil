@@ -11,18 +11,13 @@ namespace ProjekatAzil.Models
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
+        public string Email { get; set; }
         public int PhoneNumber { get; set; }
         public string Coment { get; set; }
 
         public string Country { get; set; }
-        public int PostalCode { get; set; }
-        public string Address { get; set; }
-        public string AnimalType { get; set; }
-        public int AgeChildren { get; set; }
-
-        public string DayB { get; set; }
-        
+        public string City { get; set; }
+        public string Address { get; set; }        
     }   
 
     public enum Services
@@ -38,7 +33,7 @@ namespace ProjekatAzil.Models
     public enum Days
     {
         Monday = 0,
-        Thuseday = 1,
+        Tuesday = 1,
         Wednesday = 2,
         Thursday = 4,
         Friday = 8,
@@ -78,19 +73,20 @@ namespace ProjekatAzil.Models
         public Days Days { get; set; } 
 
     }
-    public class Contact : Form
-    {
 
-    }
     public class Donation : Form
     {
         public DonationType DonationType { get; set; }
     }
 
-    public class AdoptionDogForm
+    public class AdoptionDogForm : Form
     {
-        public Yes_No Yes_No { get; set; }
+        public Yes_No AdditionalPets { get; set; }
         public Place Place { get; set; }
+        public string AnimalType { get; set; }
+        public Yes_No Parent { get; set; }
+        public int AgeChildren { get; set; }
+        public string DayB { get; set; }
 
     }
 }

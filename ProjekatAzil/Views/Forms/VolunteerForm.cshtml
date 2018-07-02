@@ -14,33 +14,34 @@
         {
             <br />
             <br />
-            <p>Ime:</p>
+            <p>First name:</p>
             <input type="text" name="Model.FirstName" value="">
             <br />
             <br />
-            <p>Prezime:</p>
+            <p>Last name:</p>
             <input type="text" name="Model.LastName" value="">
             <br />
             <br />
-            <p>Broj Telefona:</p>
-            <input type="number" name="Model.PhoneNumber" value="">
+            <p>Phone number:</p>
+            <input type="text" name="Model.PhoneNumber" value="">
             <br />
             <br />
             <p>E-mail:</p>
             <input type="email" name="Model.Email">
             <br />
             <br />
-            <p>Prijavljujem se za:</p>
+            <p>I would like to apply for:</p>
 
             <select name="Model.Services">
-                <option value="Model.DogWalking">Setanje pasa</option>
-                <option value="Model.DogCare">Nega</option>
-                <option value="Model.ShelterMaintenance">Odrzavanje azila</option>
-                <option value="Model.Anything">Zavisno od potreba azila</option>
+                <option value="Model.Empty" selected>--Please choose an option--</option>
+                <option value="Model.DogWalking">Dog Walking</option>
+                <option value="Model.DogCare">Dog Care</option>
+                <option value="Model.ShelterMaintenance">Shelter Maintenance</option>
+                <option value="Model.Anything">Anything</option>
             </select>
             <br />
             <br />
-            <p>Dani kojima zelim da volontiram:</p>
+            <p>I would like to help on:</p>
             <br />
 
             foreach (ProjekatAzil.Models.Days weekDay in Enum.GetValues(typeof(ProjekatAzil.Models.Days)))
@@ -50,7 +51,7 @@
             }
             <br />
             <br />
-            <p>Komentar:</p>
+            <p>Comment:</p>
             <textarea rows="5" cols="60">
             </textarea>
             <br />

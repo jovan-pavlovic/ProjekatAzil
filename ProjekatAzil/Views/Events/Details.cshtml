@@ -1,34 +1,48 @@
 ﻿@model ProjekatAzil.Models.Event
+@using ProjekatAzil.Models
 
-@{
-    ViewBag.Title = "Details";
+@section HeaderBottom{
+    <div class="about-heading">
+        <div class="container">
+            <h2>Event</h2>
+        </div>
+    </div>
 }
 
-<h2>Details</h2>
+    <h2 align="center">
+        @Model.Title
+    </h2>
+
+
+
+<div class="blog">
+    <!-- container -->
+    <div class="container">
+        <div class="col-md-8 blog-top-left-grid">
+            <div class="left-blog left-single">
+                <div class="blog-left">
+                    <div class="single-left-left">
+                        <img src="~/Content/Event Images/@Model.NameOfImage" alt="" />
+                        <p>@Model.UploadTimeStamp.ToString("dd/MM/yyyy  HH:MM")</p>
+                    </div>
+                    <div class="blog-left-bottom">
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="clearfix"> </div>
+        </div>
+    <!-- //container -->
+</div>
+<!-- //blog -->
+
 
 <div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @if (User.IsInRole(RolesCfg.ADMIN))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) 
+        @Html.Raw("|")
+}
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>

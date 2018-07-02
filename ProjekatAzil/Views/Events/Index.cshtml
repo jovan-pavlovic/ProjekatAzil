@@ -1,47 +1,69 @@
-﻿@model IEnumerable<ProjekatAzil.Models.Event>
+﻿@using ProjekatAzil.Models
+@model IEnumerable<ProjekatAzil.Models.Event>
+
 
 @section HeaderBottom{
     <div class="about-heading">
         <div class="container">
-            <h2>Index</h2>
+            <h2>Our Events</h2>
         </div>
     </div>
 }
-<div class="container">
-    <br />
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>@Html.DisplayNameFor(model => model.Dogs)</th>
-        <th></th>
-    </tr>
+    <div class="container">
+        <br />
+        @if (User.IsInRole(RolesCfg.ADMIN))
+        {
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        }
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>@string.Join(",", item.Dogs.Select(d => d.Name))</td>
-            <td>
-                @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", title = "Edit" }) |
-                @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "glyphicon glyphicon-list-alt", title = "Details" }) |
-                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Remove" })
-            </td>
-        </tr>
-    }
-    <br/>
-    <br/>
-</table>
-</div>
+        <div class="blog">
+            <div class="container">
+                <div class="blog-top-grids">
+                    <div class="col-md-8 blog-top-left-grid">
+                        <div class="left-blog">
+                            @foreach (var item in Model)
+                            {
+                                <div class="blog-left">
+                                    <div class="blog-left-left">
+                                        @item.UploadTimeStamp.Date.ToString("d")
+                                        <a href="@Url.Action("Details", new { id = item.Id})">
+                                            <img src="~/Content/Event Images/@item.NameOfImage" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="blog-left-right">
+                                        <div class="col-lg-6">
+                                            <a href="@Url.Action("Details", new { id = item.Id})">@item.Title</a>
+                                        </div>
+                                        @if (User.IsInRole(RolesCfg.ADMIN))
+                                        {
+                                            <div class="col-lg-6" align="right">
+                                                @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", title = "Edit" }) |
+                                                @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "glyphicon glyphicon-list-alt", title = "Details" }) |
+                                                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove", title = "Remove" })
+                                            </div>
+                                        }
+                                        <p>
+                                            @item.Description
+                                        </p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            }
+                        </div>
+                        <nav>
+                            <ul class="pagination">
+
+                                @for (int i = 1; i <= ViewBag.EventsTotalPages; i++)
+                                {
+                                    <li><a href="@Url.Action("Index", new { Page = i })">@i.ToString()</a></li>
+                                }
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

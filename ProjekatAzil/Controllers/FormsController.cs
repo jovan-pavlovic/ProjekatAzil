@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -26,6 +29,7 @@ namespace ProjekatAzil.Controllers
 
             return View("VolunteerForm");
         }
+
         public ActionResult Donation(DonationType[] donType)
         {
 
@@ -43,11 +47,11 @@ namespace ProjekatAzil.Controllers
             return View("Donation");
         }
 
-
-        public ActionResult Contact()
+        public ActionResult Contact(Form form)
         {
             return View("Contact");
         }
+
 
         public ActionResult AdoptionDogForm()
         {

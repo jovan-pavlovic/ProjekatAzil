@@ -13,57 +13,60 @@
 <!-- gallery -->
 <br />
 <br/>
-    <div class="container">
-       
-        @if (Model.Wishlist == false)
-        {
-            if (User.IsInRole(RolesCfg.ADMIN))
-            {
-                <p>
-                    @Html.ActionLink("Create New", "Create")
-                </p>
-            }
-            
-        }
-        <br/>
-       
-        @using (Html.BeginForm())
+<div class="container">
+
+    @if (Model.Wishlist == false)
+    {
+        if (User.IsInRole(RolesCfg.ADMIN))
         {
             <p>
-                Dogs Name: @Html.TextBox("DogName")
-                Dogs Breed: @Html.TextBox("DogBreed")
-                <input type="submit" value="Search" />
+                @Html.ActionLink("Create New", "Create")
             </p>
         }
 
+    }
+    <br />
 
-        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list" ,title ="List" })
-        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th",title = "Grid" })
-       <br/>
-        <br/>
-        @if (Model.Dogs.Count() == 0)
+    @using (Html.BeginForm())
+    {
+        <p>
+            Dogs Name: @Html.TextBox("DogName")
+            Dogs Breed: @Html.TextBox("DogBreed")
+            <input type="submit" value="Search" />
+        </p>
+    }
+
+    @if (Model.Wishlist == false)
+    {
+        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = true }, new { @class = "glyphicon glyphicon-th-list", title = "List" })
+        @Html.ActionLink(" ", "Index", "Dogs", new { listMode = false }, new { @class = "glyphicon glyphicon-th", title = "Grid" })
+    }
+
+    <br />
+    <br />
+    @if (Model.Dogs.Count() == 0)
+    {
+
+        @Html.Raw("Sorry, no dogs to show.")
+
+    }
+    else
+    {//wishlist da ne prikazuje ovo
+        if (Model.ListMode == true)
         {
 
-            @Html.Raw("Sorry, no dogs to show.")
-
+            @Html.Partial("_IndexListMode")
         }
         else
-        {//wishlist da ne prikazuje ovo
-            if (Model.ListMode == true)
-            {
-
-                @Html.Partial("_IndexListMode")
-            }
-            else
-            {
-                @Html.Partial("_IndexGridMode")
-            }
+        {
+            @Html.Partial("_IndexGridMode")
         }
-        <!-- //gallery -->
+    }
+    <!-- //gallery -->
 
-        <br/>
-        <br/>
+    <br />
+    <br />
 
-    </div>
+</div>
 
 

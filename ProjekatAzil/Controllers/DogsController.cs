@@ -21,7 +21,10 @@ namespace ProjekatAzil.Controllers
             
             IQueryable<Dog> DogQuery = db.Dogs;
 
-
+            if (viewModelDogs.Wishlist == true && !User.IsInRole(RolesCfg.USER) && !User.IsInRole(RolesCfg.ADMIN))
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (viewModelDogs.Wishlist.HasValue && viewModelDogs.Wishlist.Value)
             {
                 DogQuery = DogQuery.Where(d => d.Users.Any(u => u.UserName == User.Identity.Name));
@@ -174,6 +177,10 @@ namespace ProjekatAzil.Controllers
             if (dog == null)
             {
                 return HttpNotFound();
+            }
+            foreach(var image in dog.Images)
+            {
+                DeleteImage(image.Id);
             }
             return View(dog);
         }
